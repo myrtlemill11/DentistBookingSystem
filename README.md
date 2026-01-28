@@ -1,2 +1,2 @@
 # DentistBookingSystem
-A dentist booking sty
+A dentist booking system 
