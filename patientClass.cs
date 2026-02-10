@@ -6,19 +6,21 @@ public class Patient{
 		bool isOngoing;
 		List <string> allergies = new List<string>();
         List <string> medicalConditions = new List<string>();
-	
+		List <string> patientType = new List<string>() {"Child","Adult"};
+		string extraInfo;
 	//no args constructor for patient class
 	public Patient(){
 	}
 
     //args constructor for patient class 
-    public Patient(string fname, string lname, bool status, List<string> allergies, List<string> medicalConditions){
+    public Patient(string fname, string lname, bool status, List<string> allergies, List<string> medicalConditions,string type,string extra info){
 		this.firstName = fname;
 		this.lastName = lname;
 		this.isOngoing = status;
 		this.allergies = allergies;
 		this.medicalConditions = medicalConditions;
-
+		this.patientType = patientType[patientType.IndexOf(type)];
+		this.extraInfo = extraInfo;
     }
 
     //setter methods for patients 
@@ -54,5 +56,13 @@ public class Patient{
 	private List<string> getMedicalConditions() {
 		return this.medicalConditions;
     }
+	private string getPatientType(){
+	return this.patientType[0];
+	}
+	private string getExtraInfo()
+	{
+	return this.extraInfo;
+	}
 }
+
 
