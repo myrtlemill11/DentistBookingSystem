@@ -27,11 +27,11 @@ public class Patient{
     private void setFirstName(string fname){
 		this.firstName = fname;
     }
-	private void setLastName(string lname) {
+	private void setLastName(string lname){
 		this.lastName = lname;
     }
 
-	private void setOngoingStatus(bool status) {
+	private void setOngoingStatus(bool status){
 		this.isOngoing = status;
     }
 	private void addAllergy(string allergy){
@@ -53,16 +53,16 @@ public class Patient{
 	private List<string> getAllergies(){
 		return this.allergies;
     }
-	private List<string> getMedicalConditions() {
+	private List<string> getMedicalConditions(){
 		return this.medicalConditions;
     }
 	private string getPatientType(){
 	return this.patientType[0];
 	}
-	private string getExtraInfo()
-	{
+	private string getExtraInfo(){
 	return this.extraInfo;
 	}
 }
+
 
 
