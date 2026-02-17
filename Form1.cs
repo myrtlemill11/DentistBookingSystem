@@ -16,5 +16,10 @@ namespace frontendDental_clinic
         {
 
         }
+
+        private void Staff_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

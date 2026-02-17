@@ -30,11 +30,12 @@
         {
             IsDoctor = new Button();
             IsPatient = new Button();
+            Staff = new Button();
             SuspendLayout();
             // 
             // IsDoctor
             // 
-            IsDoctor.Location = new Point(316, 116);
+            IsDoctor.Location = new Point(316, 88);
             IsDoctor.Name = "IsDoctor";
             IsDoctor.Size = new Size(122, 62);
             IsDoctor.TabIndex = 0;
@@ -44,7 +45,7 @@
             // 
             // IsPatient
             // 
-            IsPatient.Location = new Point(316, 251);
+            IsPatient.Location = new Point(316, 178);
             IsPatient.Name = "IsPatient";
             IsPatient.Size = new Size(122, 75);
             IsPatient.TabIndex = 1;
@@ -52,11 +53,22 @@
             IsPatient.UseVisualStyleBackColor = true;
             IsPatient.Click += button2_Click;
             // 
+            // Staff
+            // 
+            Staff.Location = new Point(316, 285);
+            Staff.Name = "Staff";
+            Staff.Size = new Size(122, 75);
+            Staff.TabIndex = 2;
+            Staff.Text = "Staff";
+            Staff.UseVisualStyleBackColor = true;
+            Staff.Click += Staff_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(Staff);
             Controls.Add(IsPatient);
             Controls.Add(IsDoctor);
             Name = "Form1";
@@ -68,5 +80,6 @@
 
         private Button IsDoctor;
         private Button IsPatient;
+        private Button Staff;
     }
 }
