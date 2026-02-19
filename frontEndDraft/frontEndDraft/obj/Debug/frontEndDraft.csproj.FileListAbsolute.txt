@@ -1,0 +1,13 @@
+C:\Users\rose1\source\repos\frontEndDraft\frontEndDraft\bin\Debug\frontEndDraft.exe.config
+C:\Users\rose1\source\repos\frontEndDraft\frontEndDraft\bin\Debug\frontEndDraft.exe
+C:\Users\rose1\source\repos\frontEndDraft\frontEndDraft\bin\Debug\frontEndDraft.pdb
+C:\Users\rose1\source\repos\frontEndDraft\frontEndDraft\obj\Debug\frontEndDraft.csproj.AssemblyReference.cache
+C:\Users\rose1\source\repos\frontEndDraft\frontEndDraft\obj\Debug\frontEndDraft.Form1.resources
+C:\Users\rose1\source\repos\frontEndDraft\frontEndDraft\obj\Debug\frontEndDraft.PatientEntry.resources
+C:\Users\rose1\source\repos\frontEndDraft\frontEndDraft\obj\Debug\frontEndDraft.Properties.Resources.resources
+C:\Users\rose1\source\repos\frontEndDraft\frontEndDraft\obj\Debug\frontEndDraft.csproj.GenerateResource.cache
+C:\Users\rose1\source\repos\frontEndDraft\frontEndDraft\obj\Debug\frontEndDraft.csproj.CoreCompileInputs.cache
+C:\Users\rose1\source\repos\frontEndDraft\frontEndDraft\obj\Debug\frontEndDraft.exe
+C:\Users\rose1\source\repos\frontEndDraft\frontEndDraft\obj\Debug\frontEndDraft.pdb
+C:\Users\rose1\source\repos\frontEndDraft\frontEndDraft\obj\Debug\frontEndDraft.PatientLogin.resources
+C:\Users\rose1\source\repos\frontEndDraft\frontEndDraft\obj\Debug\frontEndDraft.SystemAuthentication.resources
