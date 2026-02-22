@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+namespace Dentalsystem;
 
-namespace classDemo1forProject
+public class Dentist
 {
-    internal class Dentist
+    public string Username;
+    public string Password;
+    public string Name;
+
+    public Dentist(string username, string password, string name)
     {
-        private String name;
-        private SqlDateTime availibility;
-        private String speciality;
-        private List<Patient>  personalPatients;
+        Username = username;
+        Password = password;
+        Name = name;
     }
 }
