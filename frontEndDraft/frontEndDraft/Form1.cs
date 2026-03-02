@@ -25,6 +25,7 @@ namespace frontEndDraft
         private void patient_Click(object sender, EventArgs e)
         {
             PatientEntry PatientEntry = new PatientEntry();
+            patientLogin.WindowState = FormWindowState.Maximized;
             PatientEntry.Show();
         }
 
@@ -34,3 +35,4 @@ namespace frontEndDraft
         }
     }
 }
+
