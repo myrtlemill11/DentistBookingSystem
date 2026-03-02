@@ -1,4 +1,5 @@
-﻿using System;
+﻿namespace Dentalsystem;
+using System;
 
 public class Patient{
 		string firstName;
@@ -63,6 +64,7 @@ public class Patient{
 	return this.extraInfo;
 	}
 }
+
 
 
 
