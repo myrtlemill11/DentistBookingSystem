@@ -21,7 +21,9 @@ namespace frontEndDraft
         private void returningPatient_Click_1(object sender, EventArgs e)
         {
             PatientLogin patientLogin = new PatientLogin();
+            patientLogin.WindowState = FormWindowState.Maximized;
             patientLogin.Show();
         }
     }
 }
+
