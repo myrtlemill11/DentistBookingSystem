@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -54,6 +54,7 @@ namespace frontEndDraft
                     if (password == users[i].getPassword())
                     {
                         SystemAuthentication authentication = new SystemAuthentication();
+                        authentication.WindowState = FormWindowState.Maximized;
                         authentication.Show();
                         
                           
@@ -83,3 +84,4 @@ namespace frontEndDraft
 
     }
 }
+
