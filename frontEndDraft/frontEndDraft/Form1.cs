@@ -31,8 +31,10 @@ namespace frontEndDraft
 
         private void staff_Click(object sender, EventArgs e)
         {
-
+            // go into form that has two buttons, one for admin and one for dentist
+            // for dentist button, open console
         }
     }
 }
+
 
