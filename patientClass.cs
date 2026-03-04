@@ -6,7 +6,9 @@ public class Patient{
 		bool isOngoing;
 		List <string> allergies = new List<string>();
         List <string> medicalConditions = new List<string>();
+		// list of possible patient types
 		List <string> patientType = new List<string>() {"Child","Adult"};
+		string specificPatientType = null; // type of patient for object of this class
 		string extraInfo;
 	//no args constructor for patient class
 	public Patient(){
@@ -19,7 +21,7 @@ public class Patient{
 		this.isOngoing = status;
 		this.allergies = allergies;
 		this.medicalConditions = medicalConditions;
-		this.patientType = patientType[patientType.IndexOf(type)];
+		this.specificPatientType = patientType[patientType.IndexOf(type)];
 		this.extraInfo = extraInfo;
     }
 
@@ -63,6 +65,7 @@ public class Patient{
 	return this.extraInfo;
 	}
 }
+
 
 
 
