@@ -1,7 +1,0 @@
-C:\Users\rose1\source\repos\consoleBookingSystem\consoleBookingSystem\bin\Debug\consoleBookingSystem.exe.config
-C:\Users\rose1\source\repos\consoleBookingSystem\consoleBookingSystem\bin\Debug\consoleBookingSystem.exe
-C:\Users\rose1\source\repos\consoleBookingSystem\consoleBookingSystem\bin\Debug\consoleBookingSystem.pdb
-C:\Users\rose1\source\repos\consoleBookingSystem\consoleBookingSystem\obj\Debug\consoleBookingSystem.csproj.AssemblyReference.cache
-C:\Users\rose1\source\repos\consoleBookingSystem\consoleBookingSystem\obj\Debug\consoleBookingSystem.csproj.CoreCompileInputs.cache
-C:\Users\rose1\source\repos\consoleBookingSystem\consoleBookingSystem\obj\Debug\consoleBookingSystem.exe
-C:\Users\rose1\source\repos\consoleBookingSystem\consoleBookingSystem\obj\Debug\consoleBookingSystem.pdb
