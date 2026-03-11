@@ -15,6 +15,7 @@ namespace consoleBookingSystem.Buisness
         private List<Booking> appointments = new List<Booking>();
         private DateTime DOB;
         private string typeOfPatient;
+        private string id;
 
         // getter methods
         public Dentist getDentist()
@@ -59,4 +60,5 @@ namespace consoleBookingSystem.Buisness
 
 
     }
+
 }
