@@ -70,7 +70,16 @@ namespace consoleBookingSystem.Buisness
             // ask user if appointment is urgent
             Console.WriteLine("Is your appointment urgent? (y/n)");
             string userResponse = Console.ReadKey().ToString().ToLower();
-
+            if (userResponse == "y")
+            {
+                // if yes, set priority level to 1
+                newBooking.setPriorityLevel(1);
+            }
+            else
+            {
+                // if no, set priority level to 2
+                newBooking.setPriorityLevel(2);
+            }
             // present user with dropdown list of symptoms
             Console.WriteLine("Please select the reason for your appointment from the following list by typing the value key:");
 
@@ -85,6 +94,7 @@ namespace consoleBookingSystem.Buisness
     }
 
 }
+
 
 
 
