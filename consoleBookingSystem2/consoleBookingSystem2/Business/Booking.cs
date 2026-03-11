@@ -36,5 +36,31 @@ namespace consoleBookingSystem.Buisness
         {
             return priorityLevel;
         }
+
+        // setter methods
+        public void setDate(DateTime d)
+        {
+            date = d;
+        }
+        public void setPatient(Patient p)
+        {
+            patient = p;
+        }
+
+        public void setDentist(Dentist d)
+        {
+            dentist = d;
+        }
+
+        public void setReason(string r)
+        {
+            reasonForAppointment = r;
+        }
+
+        public void setPriorityLevel(int p)
+        {
+            priorityLevel = p;
+        }
     }
+
 }
