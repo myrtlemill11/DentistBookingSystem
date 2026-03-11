@@ -58,6 +58,10 @@ namespace consoleBookingSystem.Buisness
 
         public void bookAppointment()
         {
+            // create new booking object
+            Booking newBooking = new Booking();
+            // present user with dropdown list of symptoms
+            Console.WriteLine("Please select the reason for your appointment from the following list:");
 
         }
 
@@ -65,4 +69,5 @@ namespace consoleBookingSystem.Buisness
     }
 
 }
+
 
