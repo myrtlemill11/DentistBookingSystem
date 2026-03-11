@@ -8,6 +8,7 @@ namespace consoleBookingSystem.Buisness
 {
     internal class Admin : User
     {
+        protected List<Booking> appointments = new List<Booking>();
         // no arg constructor
         public Admin() { }
 
@@ -37,4 +38,5 @@ namespace consoleBookingSystem.Buisness
         public void cancel() { }
     }
 }
+
 
