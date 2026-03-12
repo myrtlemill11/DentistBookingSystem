@@ -17,6 +17,11 @@ namespace consoleBookingSystem.Buisness
         private int priorityLevel;
 
         // getter methods
+        public Patient getPatient()
+        {
+            return patient;
+        }
+
         public DateTime getDate()
         {
             return date;

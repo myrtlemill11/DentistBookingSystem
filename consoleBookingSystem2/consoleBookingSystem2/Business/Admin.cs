@@ -15,6 +15,8 @@ namespace consoleBookingSystem.Buisness
         // methods
         public void viewSchedule() {
         for (int i = 0; i < appointments.Count; i++){
+            Booking booking = appointments[i];
+
         booking.getDate();
         booking.getDentist();
         booking.getPatient();
@@ -23,7 +25,11 @@ namespace consoleBookingSystem.Buisness
         }
 
         public void viewDentistSchedule() {
+            Dentist dentist = new Dentist();
+
          for (int i = 0;i < appointments.Count; i++) {
+             Booking booking = appointments[i];
+
             if (booking.getDentist() == dentist){
                  booking.getDate();
                  booking.getDentist();
@@ -35,10 +41,10 @@ namespace consoleBookingSystem.Buisness
         }
          public void reschedule(Booking booking, DateTime Newdate) {
          // we neeed setter methods in booking class to change the date of the booking
-         Console.WriteLine(booking.getDate);
+         Console.WriteLine(booking.getDate());
          Console.WriteLine("please write new date:");
          // booking.setDate(Newdate);
-         Console.WriteLine("booking rescheduled to " + booking.getDate);
+         Console.WriteLine("booking rescheduled to " + booking.getDate());
        }
        public void book() {
        new Booking();
