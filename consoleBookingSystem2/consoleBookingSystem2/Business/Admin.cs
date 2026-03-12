@@ -33,9 +33,20 @@ namespace consoleBookingSystem.Buisness
          }
         
         }
-        public void reschedule() { }
-        public void book() { }
-        public void cancel() { }
+         public void reschedule(Booking booking, DateTime Newdate) {
+         // we neeed setter methods in booking class to change the date of the booking
+         Console.WriteLine(booking.getDate);
+         Console.WriteLine("please write new date:");
+         // booking.setDate(Newdate);
+         Console.WriteLine("booking rescheduled to " + booking.getDate);
+       }
+       public void book() {
+       new Booking();
+       }
+       public void cancel() {
+       
+       }
     }
 }
+
 
