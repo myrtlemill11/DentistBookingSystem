@@ -59,12 +59,11 @@ namespace consoleBookingSystem.Buisness
         public void bookAppointment()
         {
             // create list of symptoms for user to select from
-            List<string> symptoms = new List<string>();
-            symptoms.Add("Broken filling with little sensitivity");
-            symptoms.Add("Bleeding gums");
-            symptoms.Add("Broken dentures");
-            symptoms.Add("Loose or lost crown");
-
+            Dictionary<int, string> symptoms = new Dictionary<int, string>();
+            symptoms.Add(1, "Broken filling with little sensitivity");
+            symptoms.Add(2, "Bleeding gums");
+            symptoms.Add(3, "Broken dentures");
+            symptoms.Add(4, "Loose or lost crown");
             // create new booking object
             Booking newBooking = new Booking();
             // ask user if appointment is urgent
@@ -72,20 +71,21 @@ namespace consoleBookingSystem.Buisness
             string userResponse = Console.ReadKey().ToString().ToLower();
             if (userResponse == "y")
             {
-                // if yes, set priority level to 1
-                newBooking.setPriorityLevel(1);
+                Console.WriteLine("Please select the reason for your appointment from the following list by typing the value key:");
+                foreach (KeyValuePair<int, string> item in symptoms)
+                {
+                    Console.WriteLine($"Key: {item.Key}, Value: {item.Value}");
+                }
             }
             else
             {
-                // if no, set priority level to 2
-                newBooking.setPriorityLevel(2);
+    
             }
             // present user with dropdown list of symptoms
             Console.WriteLine("Please select the reason for your appointment from the following list by typing the value key:");
 
             // if not, ask user if appointment is due to check-up/cleaning
             // if not, present user with dropdown list of treatments
-
 
 
         }
