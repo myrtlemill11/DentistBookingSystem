@@ -88,12 +88,35 @@ namespace consoleBookingSystem.Buisness
                     Console.WriteLine("Invalid selection.");
                     return;
                 }
-                // use `response` here
+                // use change urgency rating depending on the booking and adding to the reason
+                newBooking.setPriorityLevel(1); // high rating due to urgent appointment
+                StringBuilder s = new StringBuilder();
+                s.AppendLine(symptoms[int.Parse(keyString)]);
+
+                // ask user for further information
+                Console.WriteLine("Please elaborate on symptoms present");
+                string reason = Console.ReadLine();
+                s.AppendLine(reason);
+
+                // add reason to booking
+                string reasonString = s.ToString();
+                newBooking.setReason(reasonString);
+
+                // set dentist and patient for booking
+                newBooking.setPatient(this);
+
+                if (this.dentist != null)
+                {
+                    newBooking.setDentist(this.dentist);
+                }
+                // send to admin to determine date/ AI?? / dentist
+
+                // ask user if happy with appt time
             }
             else
-    {
+            {
 
-}
+            }
 
 // present user with dropdown list of symptoms
 Console.WriteLine("Please select the reason for your appointment from the following list by typing the value key:");
