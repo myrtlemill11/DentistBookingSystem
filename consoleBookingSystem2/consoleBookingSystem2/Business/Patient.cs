@@ -64,30 +64,40 @@ namespace consoleBookingSystem.Buisness
             symptoms.Add(2, "Bleeding gums");
             symptoms.Add(3, "Broken dentures");
             symptoms.Add(4, "Loose or lost crown");
+
             // create new booking object
             Booking newBooking = new Booking();
+
             // ask user if appointment is urgent
             Console.WriteLine("Is your appointment urgent? (y/n)");
-            string userResponse = Console.ReadKey().ToString().ToLower();
-            if (userResponse == "y")
+            string userResponse = Console.ReadLine()?.Trim().ToLower();
+
+            if (userResponse == "y" || userResponse == "yes")
             {
                 Console.WriteLine("Please select the reason for your appointment from the following list by typing the value key:");
-                foreach (KeyValuePair<int, string> item in symptoms)
-                {
-                    Console.WriteLine($"Key: {item.Key}, Value: {item.Value}");
+                foreach (var pair in symptoms)
+                {    
+                    Console.WriteLine($"\"{pair.Key}\" : \"{pair.Value}\"");
                 }
+
+                ConsoleKeyInfo keyInfo = Console.ReadKey();
+                Console.WriteLine(); // move to next line after key press
+                string keyString = keyInfo.KeyChar.ToString();
+                if (!int.TryParse(keyString, out int response))
+                {
+                    Console.WriteLine("Invalid selection.");
+                    return;
+                }
+                // use `response` here
             }
             else
-            {
-    
-            }
-            // present user with dropdown list of symptoms
-            Console.WriteLine("Please select the reason for your appointment from the following list by typing the value key:");
+    {
 
-            // if not, ask user if appointment is due to check-up/cleaning
-            // if not, present user with dropdown list of treatments
+}
 
-
+// present user with dropdown list of symptoms
+Console.WriteLine("Please select the reason for your appointment from the following list by typing the value key:");
+// ...
         }
 
 
