@@ -38,7 +38,7 @@ namespace consoleBookingSystem.Data
             return newId;
         }
     }
-    public int UpdateContact(Booking booking)
+    public int UpdateAppointment(Booking booking)
     {
         using (var conn = new SqlConnection(connString))
         {
