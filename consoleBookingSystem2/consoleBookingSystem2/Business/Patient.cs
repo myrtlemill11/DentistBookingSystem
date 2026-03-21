@@ -155,7 +155,90 @@ namespace consoleBookingSystem.Buisness
             }
             else
             {
+                Console.WriteLine("Please select the reason for your appointment from the following list by typing the value key:");
+                int count = 1;
+                foreach (var pair in treatments)
+                {
+                    Console.WriteLine($"\"{count}\" : \"{pair.Key}\"");
+                    count++;
+                }
 
+                // get user response
+                ConsoleKeyInfo keyInfo = Console.ReadKey();
+                Console.WriteLine(); // move to next line after key press
+                string keyString = keyInfo.KeyChar.ToString();
+                if (!int.TryParse(keyString, out int response))
+                {
+                    Console.WriteLine("Invalid selection.");
+                    return;
+                }
+
+                // use change urgency rating depending on the booking and adding to the reason
+                StringBuilder setReason = new StringBuilder();
+
+                // get treatment value from dictionary
+                switch (int.Parse(keyString))
+                {
+                case 1:
+                    setReason.AppendLine("Cosmetic Dentistry");
+                    newBooking.setPriorityLevel(treatments["Cosmetic Dentistry"]);
+                    break;
+                case 2:
+                    setReason.AppendLine("Dental Implants");
+                    newBooking.setPriorityLevel(treatments["Dental Implants"]);
+                    break;
+                case 3:
+                    setReason.AppendLine("Dentures");
+                    newBooking.setPriorityLevel(treatments["Dentures"]);
+                    break;
+                case 4:
+                    setReason.AppendLine("General Checkup");
+                    newBooking.setPriorityLevel(treatments["General Checkup"]);
+                    break;
+                case 5:
+                    setReason.AppendLine("Root Canal Treatment");
+                    newBooking.setPriorityLevel(treatments["Root Canal Treatments"]);
+                    break;
+                case 6:
+                    setReason.AppendLine("Teeth straightening");
+                    newBooking.setPriorityLevel(treatments["Teeth straightening"]);
+                    break;
+                case 7:
+                    setReason.AppendLine("Tooth Extraction");
+                    newBooking.setPriorityLevel(treatments["Tooth Extraction"]);
+                    break;
+                case 8:
+                    setReason.AppendLine("Tooth Whitening");
+                    newBooking.setPriorityLevel(treatments["Tooth Whitening"]);
+                    break;
+                default:
+                    Console.WriteLine("Invalid selection.");
+                    return;
+        }
+
+
+
+
+
+// ask user for further information
+Console.WriteLine("Please elaborate on symptoms present");
+string reason = Console.ReadLine();
+setReason.AppendLine(reason);
+
+// add reason to booking
+string reasonString = setReason.ToString();
+newBooking.setReason(reasonString);
+
+// set dentist and patient for booking
+newBooking.setPatient(this);
+
+if (this.dentist != null)
+{
+    newBooking.setDentist(this.dentist);
+}
+// send to admin to determine date/ AI?? / dentist
+
+// ask user if happy with appt time 
             }
 
 
