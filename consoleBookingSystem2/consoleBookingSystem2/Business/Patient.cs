@@ -66,7 +66,7 @@ namespace consoleBookingSystem.Buisness
             symptoms.Add("Loose or lost crown", 10);
 
             // create list of treatments for user to select from
-Dictionary<string, int> treatments = new Dictionary<string, int>();
+            Dictionary<string, int> treatments = new Dictionary<string, int>();
             treatments.Add("Cosmetic Dentistry", 2);
             treatments.Add("Dental Implants", 4);
             treatments.Add("Dentures", 5);
