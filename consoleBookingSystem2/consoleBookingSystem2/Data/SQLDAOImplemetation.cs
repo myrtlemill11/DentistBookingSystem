@@ -91,7 +91,7 @@ namespace consoleBookingSystem.Data
                 string sql = @"UPDATE Patients SET
                     dentist = @dentist
                     WHERE id = @id";
-                return conn.Execute(sql, new { dentist, id);
+                return conn.Execute(sql, new { dentist, id});
             }
             }
         }
