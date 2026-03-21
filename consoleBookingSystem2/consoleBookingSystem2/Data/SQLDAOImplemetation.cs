@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using System.Data.SqlClient;
 
 namespace consoleBookingSystem.Data
 {
@@ -18,7 +19,7 @@ namespace consoleBookingSystem.Data
         public List<Booking> viewAppointments()
         {
 
-            using (var conn = new SqlConnection(connString))
+            using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
             {
 
                 return conn.Query<Booking>("SELECT * FROM Bookings ORDER BY LastName")
@@ -27,7 +28,7 @@ namespace consoleBookingSystem.Data
         }
         public int InsertAppointment(Booking Booking)
         {
-            using (var conn = new SqlConnection(connString))
+            using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
             {
                 string sql = @"INSERT INTO Bookings
                    (date, dentist, patient, reasonForAppt, priorityLevel)
@@ -40,7 +41,7 @@ namespace consoleBookingSystem.Data
         }
         public int UpdateAppointment(Booking booking)
         {
-            using (var conn = new SqlConnection(connString))
+            using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
             {
                 string sql = @"UPDATE Bookings SET
                     date = @date,
@@ -56,7 +57,7 @@ namespace consoleBookingSystem.Data
 
         public int DeleteAppointment(int BookingId)
         {
-            using (var conn = new SqlConnection(connString))
+            using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
             {
                 string sql = "DELETE FROM Bookings WHERE BookingId = @Id";
                 return conn.Execute(sql, new { Id = BookingId });
@@ -64,7 +65,7 @@ namespace consoleBookingSystem.Data
         }
         public int InsertPatient(Patient patient)
         {
-            using (var conn = new SqlConnection(connString))
+            using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
             {
                 string sql = @"INSERT INTO Patients
                    (allergies, medicalConditions, dentist,appointments, DOB, typeOfPatient, id)
@@ -78,7 +79,7 @@ namespace consoleBookingSystem.Data
         }
         public int DeletePatient(int id)
         {
-            using (var conn = new SqlConnection(connString))
+            using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
             {
                 string sql = "DELETE FROM Patients WHERE id = @Id";
                 return conn.Execute(sql, new { Id = id });
@@ -86,17 +87,15 @@ namespace consoleBookingSystem.Data
         }
         public int assignPatient(Patient patient, Dentist dentist)
         {
-            using (var conn = new SqlConnection(connString))
+            using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
             {
                 string sql = @"UPDATE Patients SET
                     dentist = @dentist
                     WHERE id = @id";
-                return conn.Execute(sql, new { dentist, id});
+                return conn.Execute(sql, new { dentist = dentist, id = patient.getId() });
             }
             }
         }
 
     }
-}
-
 
