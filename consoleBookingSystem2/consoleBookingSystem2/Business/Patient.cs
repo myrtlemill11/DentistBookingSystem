@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -75,6 +75,7 @@ namespace consoleBookingSystem.Buisness
             treatments.Add("Teeth straightening", 4);
             treatments.Add("Tooth Extraction", 7);
             treatments.Add("Tooth Whitening", 2);
+
             // create new booking object
             Booking newBooking = new Booking();
 
@@ -85,11 +86,14 @@ namespace consoleBookingSystem.Buisness
             if (userResponse == "y" || userResponse == "yes")
             {
                 Console.WriteLine("Please select the reason for your appointment from the following list by typing the value key:");
+                int count = 1;
                 foreach (var pair in symptoms)
-                {    
-                    Console.WriteLine($"\"{pair.Key}\" : \"{pair.Value}\"");
+                {
+                    Console.WriteLine($"\"{count}\" : \"{pair.Value}\"");
+                    count++;
                 }
 
+                // get user response
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
                 Console.WriteLine(); // move to next line after key press
                 string keyString = keyInfo.KeyChar.ToString();
@@ -98,18 +102,44 @@ namespace consoleBookingSystem.Buisness
                     Console.WriteLine("Invalid selection.");
                     return;
                 }
+
                 // use change urgency rating depending on the booking and adding to the reason
-                newBooking.setPriorityLevel(1); // high rating due to urgent appointment
-                StringBuilder s = new StringBuilder();
-                s.AppendLine(symptoms[int.Parse(keyString)]);
+                StringBuilder setReason = new StringBuilder();
+
+                // get symptom value from dictionary
+                switch (int.Parse(keyString))
+                {
+                    case 1:
+                        setReason.AppendLine("Broken filling with little sensitivity");
+                        newBooking.setPriorityLevel(10);
+                        break;
+                    case 2:
+                        setReason.AppendLine("Bleeding gums");
+                        newBooking.setPriorityLevel(10);
+                        break;
+                    case 3:
+                        setReason.AppendLine("Broken dentures");
+                        newBooking.setPriorityLevel(10);
+                        break;
+                    case 4:
+                        setReason.AppendLine("Loose or lost crown");
+                        newBooking.setPriorityLevel(10);
+                        break;
+                    default:
+                        Console.WriteLine("Invalid selection.");
+                        return;
+                }
+
+                
+                
 
                 // ask user for further information
                 Console.WriteLine("Please elaborate on symptoms present");
                 string reason = Console.ReadLine();
-                s.AppendLine(reason);
+                setReason.AppendLine(reason);
 
                 // add reason to booking
-                string reasonString = s.ToString();
+                string reasonString = setReason.ToString();
                 newBooking.setReason(reasonString);
 
                 // set dentist and patient for booking
@@ -128,13 +158,15 @@ namespace consoleBookingSystem.Buisness
 
             }
 
-// present user with dropdown list of symptoms
-Console.WriteLine("Please select the reason for your appointment from the following list by typing the value key:");
-// ...
+
         }
 
 
     }
+
+}
+
+
 
 }
 
