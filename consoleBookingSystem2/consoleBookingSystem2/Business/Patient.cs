@@ -65,6 +65,16 @@ namespace consoleBookingSystem.Buisness
             symptoms.Add("Broken dentures", 10);
             symptoms.Add("Loose or lost crown", 10);
 
+            // create list of treatments for user to select from
+Dictionary<string, int> treatments = new Dictionary<string, int>();
+            treatments.Add("Cosmetic Dentistry", 2);
+            treatments.Add("Dental Implants", 4);
+            treatments.Add("Dentures", 5);
+            treatments.Add("General Checkup", 1);
+            treatments.Add("Root Canal Treatment", 9);
+            treatments.Add("Teeth straightening", 4);
+            treatments.Add("Tooth Extraction", 7);
+            treatments.Add("Tooth Whitening", 2);
             // create new booking object
             Booking newBooking = new Booking();
 
