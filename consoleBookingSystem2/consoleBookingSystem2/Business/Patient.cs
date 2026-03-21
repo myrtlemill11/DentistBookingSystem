@@ -59,11 +59,11 @@ namespace consoleBookingSystem.Buisness
         public void bookAppointment()
         {
             // create list of symptoms for user to select from
-            Dictionary<int, string> symptoms = new Dictionary<int, string>();
-            symptoms.Add(1, "Broken filling with little sensitivity");
-            symptoms.Add(2, "Bleeding gums");
-            symptoms.Add(3, "Broken dentures");
-            symptoms.Add(4, "Loose or lost crown");
+            Dictionary<string, int> symptoms = new Dictionary<string, int>();
+            symptoms.Add("Broken filling with little sensitivity", 10);
+            symptoms.Add("Bleeding gums", 10);
+            symptoms.Add("Broken dentures", 10);
+            symptoms.Add("Loose or lost crown", 10);
 
             // create new booking object
             Booking newBooking = new Booking();
