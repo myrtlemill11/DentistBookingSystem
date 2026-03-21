@@ -89,7 +89,7 @@ namespace consoleBookingSystem.Buisness
                 int count = 1;
                 foreach (var pair in symptoms)
                 {
-                    Console.WriteLine($"\"{count}\" : \"{pair.Value}\"");
+                    Console.WriteLine($"\"{count}\" : \"{pair.Key}\"");
                     count++;
                 }
 
