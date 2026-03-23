@@ -49,8 +49,9 @@ namespace consoleBookingSystem.Buisness
        public void book() {
        new Booking();
        }
-       public void cancel() {
-       
+       public void cancel(int bookingId) {
+         //not fully sure how to implement this method, we need to find a way to get the booking id.
+         SQLDAOImplentation.DeleteAppointment(bookingId);
        }
     }
 }
