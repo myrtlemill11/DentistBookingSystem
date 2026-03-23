@@ -34,8 +34,15 @@ namespace consoleBookingSystem.Data
                    (date, dentist, patient, reasonForAppt, priorityLevel)
                    VALUES (@date, @dentist, @patient, @reasonForAppt, @priorityLevel);
                    SELECT CAST(SCOPE_IDENTITY() AS INT);";
-
-                int newId = conn.ExecuteScalar<int>(sql, Booking);
+                    
+                int newId = conn.ExecuteScalar<int>(sql, new 
+                {
+                    date = Booking.getDate(),
+                    dentist = Booking.getDentist().getId(), 
+                    patient = Booking.getPatient().getId(),
+                    reasonForAppointment = Booking.getReason(),
+                    priorityLevel = Booking.getPriorityLevel()
+                });
                 return newId;
             }
         }
