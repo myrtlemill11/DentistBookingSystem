@@ -47,6 +47,11 @@ namespace consoleBookingSystem.Buisness
             return phoneNumber;
         }
 
+        public string getPassword()
+        {
+            return password;
+        }
+
         // setter methods
         public void setFirstName(string s)
         {
