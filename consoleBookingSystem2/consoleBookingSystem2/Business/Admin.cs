@@ -8,6 +8,7 @@ namespace consoleBookingSystem.Buisness
 {
     public class Admin : User
     {    
+        [JsonProperty]
         protected List<Booking> appointments = new List<Booking>();
         // no arg constructor
         public Admin() { }
