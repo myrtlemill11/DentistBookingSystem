@@ -54,6 +54,42 @@ namespace consoleBookingSystem.Buisness
             return typeOfPatient;
         }
 
+        // setter methods
+        public void setDentist(Dentist d)
+        {
+            dentist = d;
+        }
+
+        public void setMedicalConditions(List<string> m)
+        {
+            medicalConditions = m;
+        }
+
+        public void setAppointments(List<Booking> a)
+        {
+            appointments = a;
+        }
+
+        public void setAllergies(List<string> a)
+        {
+            allergies = a;
+        }
+
+        public void setTypeOfPatient(string t)
+        {
+            typeOfPatient = t;
+        }
+
+        public void setDOB(DateTime d)
+        {
+            DOB = d;
+        }
+
+        public void setId(string i)
+        {
+            id = i;
+        }
+
         // methods to change/add bookings
         public void requestCancellation()
         {
