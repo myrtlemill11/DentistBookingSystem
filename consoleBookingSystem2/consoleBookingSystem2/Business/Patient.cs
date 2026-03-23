@@ -9,12 +9,19 @@ namespace consoleBookingSystem.Buisness
     public class Patient : User
     {
         // data fields
+        [JsonProperty]
         private List<string> allergies = new List<string>();
+        [JsonProperty]
         private List<string> medicalConditions = new List<string>();
+        [JsonProperty]
         private Dentist dentist;
+        [JsonProperty]
         private List<Booking> appointments = new List<Booking>();
+        [JsonProperty]
         private DateTime DOB;
+        [JsonProperty]
         private string typeOfPatient;
+        [JsonProperty]
         private string id;
 
         // getter methods
