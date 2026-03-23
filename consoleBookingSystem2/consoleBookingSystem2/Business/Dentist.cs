@@ -29,6 +29,11 @@ namespace consoleBookingSystem.Buisness
             return b;
         }
 
+        // setter methods
+        public void setSpecialty(string s)
+        {
+            this.speciality = s;
+        }
         
         // Dentist Dashboard Methods
         
