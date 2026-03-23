@@ -28,6 +28,10 @@ namespace consoleBookingSystem.Data
         }
         public int InsertAppointment(Booking Booking)
         {
+        // get Json string of dentist object to store in database
+        var dentistJson = Newtonsoft.Json.JsonConvert.SerializeObject(Booking.getDentist());
+        // get Json string of patient object to store in database
+        var patientJson = Newtonsoft.Json.JsonConvert.SerializeObject(Booking.getPatient());
             using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
             {
                 string sql = @"INSERT INTO Bookings
