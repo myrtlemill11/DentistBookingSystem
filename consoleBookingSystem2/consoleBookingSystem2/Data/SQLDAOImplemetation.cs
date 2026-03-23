@@ -16,13 +16,13 @@ namespace consoleBookingSystem.Data
         private string connString = ConfigurationManager
 .ConnectionStrings["AppointmentsDB"].ConnectionString;
 
-        public List<Booking> viewAppointments()
+        public List<string> viewAppointments()
         {
 
             using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
             {
 
-                return conn.Query<Booking>("SELECT * FROM Bookings ORDER BY LastName")
+                return conn.Query<string>("SELECT * FROM Bookings ORDER BY date")
                            .ToList();
             }
         }
