@@ -4,3 +4,7 @@ use case:https://docs.google.com/document/d/1qtB13dBsrEWBgPxOY2zr1EXT0kytJQMeZBl
 SQL plan: https://docs.google.com/document/d/1kG1ncoJJjTMO2Fj2XtIi-_m1EQ5m9G-j/edit
 Miro Board:https://miro.com/app/board/uXjVGwO0Hgk=/
 Trello board:https://trello.com/b/KlIhL7pL/cybermed
+
+1) Download Dapper (nuget package)
+2) Download Microsoft.Data.SqlClient (nuget package)
+3) Download Newtonsoft.Json (nuget package)
