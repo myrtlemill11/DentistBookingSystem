@@ -11,11 +11,17 @@ namespace consoleBookingSystem.Buisness
         // no arg constructor
         public User() { }
         // data fields
+        [JsonProperty]
         private string firstName;
+        [JsonProperty]
         private string lastName;
+        [JsonProperty]
         private string id;
+        [JsonProperty]
         private string password;
+        [JsonProperty]
         private string email;
+        [JsonProperty]
         private long phoneNumber;
 
         // get methods
