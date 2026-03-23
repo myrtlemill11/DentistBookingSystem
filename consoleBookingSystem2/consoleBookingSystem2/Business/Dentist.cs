@@ -9,8 +9,11 @@ namespace consoleBookingSystem.Buisness
     public class Dentist : User
     {
         // data fields
+        [JsonProperty]
         public string speciality;
+        [JsonProperty]
         private Patient[] patients = new Patient[20];
+        [JsonProperty]
         private List<Booking> appointments = new List<Booking>();
 
         // getter methods
