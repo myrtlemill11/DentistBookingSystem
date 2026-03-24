@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using consoleBookingSystem.Data;
+
+
+
 
 namespace consoleBookingSystem.Buisness
 {
@@ -52,9 +56,10 @@ namespace consoleBookingSystem.Buisness
        new Booking();
        }
        public void cancel(int bookingId) {
-         //not fully sure how to implement this method, we need to find a way to get the booking id.
-         SQLDAOImplentation.DeleteAppointment(bookingId);
+           SQLDAOImplementation dao = new SQLDAOImplementation();
+           dao.DeleteAppointment(bookingId);
        }
+
     }
 }
 

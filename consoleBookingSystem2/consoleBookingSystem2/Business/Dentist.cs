@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using consoleBookingSystem.Data;
 
 
+
 namespace consoleBookingSystem.Buisness
 {
     public class Dentist : User
@@ -27,8 +28,10 @@ namespace consoleBookingSystem.Buisness
 
         public List<Booking> getAppointments()
         {
-            return Coordinator.getAllAppointments();
+            SQLDAOImplementation dao = new SQLDAOImplementation();
+            return dao.viewAppointments();
         }
+
 
         public Booking getAppointment(Booking b)
         {
