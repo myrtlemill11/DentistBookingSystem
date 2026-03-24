@@ -9,7 +9,7 @@ namespace consoleBookingSystem.Buisness
 {
     public class Coordinator
     {
-        private DAO dao;
+        private SQLDAOImplementation dao;
 
         public Coordinator()
         {
