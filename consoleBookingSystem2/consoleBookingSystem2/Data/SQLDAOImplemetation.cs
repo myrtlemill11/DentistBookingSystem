@@ -12,7 +12,7 @@ using Dapper;
 
 namespace consoleBookingSystem.Data
 {
-    public class SQLDAOImplementation : DAO
+    public class SQLDAOImplementation
     {
         private string connString = ConfigurationManager
 .ConnectionStrings["AppointmentsDB"].ConnectionString;
