@@ -86,19 +86,30 @@ namespace consoleBookingSystem.Data
                 return newId;
             }
         }
-        public int UpdateAppointment(Booking booking)
+        public int UpdateAppointment(Booking booking) 
         {
+            // get Json string of dentist object to store in database
+            var dentistJson = Newtonsoft.Json.JsonConvert.SerializeObject(booking.getDentist());
+            // get Json string of patient object to store in database
+            var patientJson = Newtonsoft.Json.JsonConvert.SerializeObject(booking.getPatient());
+
             using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
             {
-                string sql = @"UPDATE Bookings SET
-                    date = @date,
-                    dentist = @dentist,
-                    patient = @patient,
-                    reasonForAppt = @reasonForAppt,
-                    priorityLevel = @priorityLevel
-                    WHERE BookingId = @BookingId";
+                string sql = @"UPDATE Appointments SET
+                date = @date
+                WHERE
+                reasonForAppointment = @reasonForAppointment and 
+                priorityLevel = @priorityLevel";
 
-                return conn.Execute(sql, booking);
+                using (Microsoft.Data.SqlClient.SqlCommand cmd = new Microsoft.Data.SqlClient.SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@date", booking.getDate());
+                    cmd.Parameters.AddWithValue("@reasonForAppointment", booking.getReason());
+                    cmd.Parameters.AddWithValue("@priorityLevel", booking.getPriorityLevel());
+            
+                    conn.Open();
+                    return cmd.ExecuteNonQuery();
+                }
             }
         }
 
