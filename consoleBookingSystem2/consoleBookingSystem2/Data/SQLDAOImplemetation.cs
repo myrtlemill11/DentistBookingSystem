@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
-using System.Data.SqlClient;
+
 
 namespace consoleBookingSystem.Data
 {
@@ -17,13 +17,13 @@ namespace consoleBookingSystem.Data
         private string connString = ConfigurationManager
 .ConnectionStrings["AppointmentsDB"].ConnectionString;
 
-        public List<string> viewAppointments()
+        public List<Booking> viewAppointments()
         {
 
             using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
             {
 
-                return conn.Query<string>("SELECT * FROM Bookings ORDER BY date")
+                return conn.Query<Booking>("SELECT * FROM Bookings ORDER BY date")
                            .ToList();
             }
         }
@@ -45,7 +45,7 @@ namespace consoleBookingSystem.Data
                     date = Booking.getDate(),
                     dentist = Booking.getDentist().getId(), 
                     patient = Booking.getPatient().getId(),
-                    reasonForAppointment = Booking.getReason(),
+                    reasonForAppt = Booking.getReason(),
                     priorityLevel = Booking.getPriorityLevel()
                 });
                 return newId;

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using consoleBookingSystem.Data;
+
 
 namespace consoleBookingSystem.Buisness
 {
@@ -25,7 +27,7 @@ namespace consoleBookingSystem.Buisness
 
         public List<Booking> getAppointments()
         {
-            return appointments;
+            return Coordinator.getAllAppointments();
         }
 
         public Booking getAppointment(Booking b)
@@ -88,8 +90,16 @@ namespace consoleBookingSystem.Buisness
 
         private void viewAppointments()
         {
-            Console.WriteLine("Viewing appointments...");
+            List<Booking> bookings = getAppointments();
+
+            foreach (Booking b in bookings)
+            {
+                Console.WriteLine("Date: " + b.getDate());
+                Console.WriteLine("Reason: " + b.getReason());
+                Console.WriteLine("Priority: " + b.getPriorityLevel());
+            }
         }
+
 
         private void confirmAppointment()
         {
