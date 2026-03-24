@@ -84,11 +84,6 @@ namespace consoleBookingSystem.Buisness
             DOB = d;
         }
 
-        public void setId(string i)
-        {
-            id = i;
-        }
-
         // methods to change/add bookings
         public void requestCancellation()
         {
