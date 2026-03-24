@@ -136,14 +136,13 @@ namespace consoleBookingSystem.Data
             }
 
         }
-        public int DeleteAppointment(DateTime date) 
+        public int DeleteUser(string id)
         {
-        using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
+            using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
             {
-                 string sql = "DELETE FROM Appointments WHERE [date] = @date";
-                 return conn.Execute(sql, new { date });
+                string sql = "DELETE FROM Users WHERE id = @Id";
+                return conn.Execute(sql, new { Id = id });
             }
-    
         }
          
         public List<string> viewUsers()
