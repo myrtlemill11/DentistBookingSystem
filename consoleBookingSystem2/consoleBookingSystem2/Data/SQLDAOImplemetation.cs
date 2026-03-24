@@ -109,5 +109,40 @@ namespace consoleBookingSystem.Data
             }
         }
 
+        public int insertUser(User user)
+        {
+        using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
+        {
+            string sql = @"INSERT INTO Users
+               (firstName, lastName, id, password, email, phoneNumber)
+               VALUES (@firstName, @lastName, @id, @password, @email, @phoneNumber);
+               SELECT CAST(SCOPE_IDENTITY() AS INT);";
+            int newId = conn.ExecuteScalar<int>(sql, new
+            {
+                firstName = user.getFirstName(),
+                lastName = user.getLastName(),
+                id = user.getId(),
+                password = user.getPassword(),
+                email = user.getEmail(),
+                phoneNumber = user.getPhoneNumber(),
+            });
+            return newId;
+
+
+        }
+
+    }
+         
+        public List<string> viewUsers()
+        {
+
+            using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
+            {
+
+                return conn.Query<string>("SELECT * FROM Users ORDER BY id")
+                .ToList();
+            }
+        }
+
     }
 
