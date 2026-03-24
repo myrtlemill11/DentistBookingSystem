@@ -22,8 +22,6 @@ namespace consoleBookingSystem.Buisness
         private DateTime DOB;
         [JsonProperty]
         private string typeOfPatient;
-        [JsonProperty]
-        private string id;
 
         // getter methods
         public Dentist getDentist()
