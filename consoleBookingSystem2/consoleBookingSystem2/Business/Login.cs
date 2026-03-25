@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using consoleBookingSystem.Data;
 
 
-namespace consoleBookingSystem2.Business
+namespace consoleBookingSystem.Buisness
 {
     public class Login
     {
