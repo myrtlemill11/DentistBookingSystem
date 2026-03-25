@@ -58,6 +58,36 @@ namespace consoleBookingSystem2.Business
         }
         public void adminLogin()
         {
+            Console.WriteLine("\n=== Admin Login ===");
+
+            Console.Write("Enter ID: ");
+            string id = Console.ReadLine();
+
+            Console.Write("Enter Password: ");
+            string password = Console.ReadLine();
+
+            User admin = new Admin();
+
+            admin = dao.getUser(id, password, "admin");
+
+            Console.WriteLine(admin.getId() + " " + admin.getPassword());
+
+            try
+            {
+                // Dummy login
+                if (id == admin.getId() && password == admin.getPassword())
+                {
+                    Console.WriteLine("Login successful!");
+                    Console.WriteLine("Admin dashboard not implemented yet.");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid login details.");
+                }
+            } catch (Exception e) 
+            { 
+                Console.WriteLine(e.ToString()); 
+            }
 
         }
 
