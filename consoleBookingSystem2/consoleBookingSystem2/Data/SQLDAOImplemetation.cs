@@ -61,6 +61,45 @@ namespace consoleBookingSystem.Data
             }
         }
 
+
+        
+                public Dentist adminGetDentist(string ID) // works
+        {
+            using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
+            {
+                // get all data fields of object to create admin object to return
+                string sqlDentistId = "SELECT id FROM Users WHERE id = @id";
+                    string dentistId = conn.QueryFirstOrDefault<string>(sqlDentistId, new { id = ID });
+
+                    string sqlDentistPassword = "SELECT password FROM Users WHERE id = @id";
+                    string dentistPassword = conn.QueryFirstOrDefault<string>(sqlDentistPassword, new { id = ID });
+
+                    string sqlDentistFirstName = "SELECT firstName FROM Users WHERE id = @id";
+                    string dentistFirstName = conn.QueryFirstOrDefault<string>(sqlDentistFirstName, new { id = ID });
+
+                    string sqlDentistLastName = "SELECT lastName FROM Users WHERE id = @id";
+                    string dentistLastName = conn.QueryFirstOrDefault<string>(sqlDentistLastName, new { id = ID });
+
+                    string sqlDentistPhone = "SELECT phoneNumber FROM Users WHERE id = @id";
+                    long dentistPhoneNumber = conn.QueryFirstOrDefault<long>(sqlDentistPhone, new { id = ID });
+
+                    string sqlDentistEmail = "SELECT email FROM Users WHERE id = @id";
+                    string dentistEmail = conn.QueryFirstOrDefault<string>(sqlDentistEmail, new { id = ID });
+
+                    Dentist dentist = new Dentist();
+                    dentist.setEmail(dentistEmail);
+                    dentist.setFirstName(dentistFirstName);
+                    dentist.setLastName(dentistLastName);
+                    dentist.setPhoneNumber(dentistPhoneNumber);
+                    dentist.setPassword(dentistPassword);
+                    dentist.setId(dentistId);
+
+
+                    return dentist;
+                
+            }
+        }
+
         public List<string> adminViewAppointments()
         {
             using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
