@@ -271,7 +271,51 @@ namespace consoleBookingSystem.Buisness
 
     }
 
+// method for dashboard
+public void getDashboard()
+{
+    // set int value for input
+    int input = 0;
+    // present user options
+    Console.WriteLine("Patient Dashboard");
+    Console.WriteLine("Select an option by typing the numerical value:");
+    Console.WriteLine("1. Book Appointment");
+    Console.WriteLine("2. Request Cancellation");
+    Console.WriteLine("3. View Appointments");
+    Console.WriteLine("4. Exit");
+    // get user response and call appropriate method
+    try
+    {
+        input = int.Parse(Console.ReadLine());
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("Please try again");
+        getDashboard();
+    }
+    switch (input)
+    {
+        case 1:
+            bookAppointment();
+            break;
+        case 2:
+            requestCancellation();
+            break;
+        case 3:
+            Console.Write(string.Join(" ", dao.viewPatientAppointments(this)));
+            break;
+        case 4:
+            Console.WriteLine("Exiting dashboard...");
+            break;
+        default:
+            Console.WriteLine("Invalid selection.");
+            getDashboard();
+            break;
+    }
 }
+
+}
+
 
 
 
