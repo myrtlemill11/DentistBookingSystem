@@ -23,14 +23,7 @@ namespace consoleBookingSystem.Buisness
 
         // methods
         public void viewSchedule() {
-        for (int i = 0; i < appointments.Count; i++){
-            Booking booking = appointments[i];
-
-        booking.getDate();
-        booking.getDentist();
-        booking.getPatient();
-        booking.getPriorityLevel();
-            }
+            Console.Write(string.Join(" ,", dao.adminViewAppointments()));
         }
 
         // get dashboard for using functions
