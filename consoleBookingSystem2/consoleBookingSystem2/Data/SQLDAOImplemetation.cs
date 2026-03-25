@@ -63,12 +63,12 @@ namespace consoleBookingSystem.Data
 
 
         
-                public Dentist adminGetDentist(string ID) // works
+                public Dentist adminGetDentist(string ID)
         {
             using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
             {
-                // get all data fields of object to create admin object to return
-                string sqlDentistId = "SELECT id FROM Users WHERE id = @id";
+                    // get all data fields of object to create dentist object to return
+                    string sqlDentistId = "SELECT id FROM Users WHERE id = @id";
                     string dentistId = conn.QueryFirstOrDefault<string>(sqlDentistId, new { id = ID });
 
                     string sqlDentistPassword = "SELECT password FROM Users WHERE id = @id";
@@ -113,8 +113,6 @@ namespace consoleBookingSystem.Data
 {
     using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
     {
-        //string sql = "SELECT * FROM Appointments WHERE [date] = @date";
-        //var booking = conn.QueryFirstOrDefault<Booking>(sql, new { date });
 
         string sqlDentist = "SELECT dentist FROM Appointments WHERE [date] = @date";
         string dentist = conn.QueryFirstOrDefault<string>(sqlDentist, new { date });
@@ -200,7 +198,7 @@ namespace consoleBookingSystem.Data
             {
                 if (type == "dentist")
                 {
-                    // get all data fields of object to create admin object to return
+                    // get all data fields of object to create object to return
                     string sqlDentistId = "SELECT id FROM Users WHERE id = @id and password = @password";
                     string dentistId = conn.QueryFirstOrDefault<string>(sqlDentistId, new { id = ID, password = PASSWORD });
 
@@ -233,7 +231,7 @@ namespace consoleBookingSystem.Data
 
                 else if (type == "patient")
                 {
-                    // get all data fields of object to create admin object to return
+                    // get all data fields of object to create object to return
                     string sqlPatientId = "SELECT id FROM Users WHERE id = @id and password = @password";
                     string patientId = conn.QueryFirstOrDefault<string>(sqlPatientId, new { id = ID, password = PASSWORD });
 
@@ -266,7 +264,7 @@ namespace consoleBookingSystem.Data
 
                 else if(type == "admin")
                 {
-                    // get all data fields of object to create admin object to return
+                    // get all data fields of object to create object to return
                     string sqlAdminId = "SELECT id FROM Users WHERE id = @id and password = @password";
                     string adminId = conn.QueryFirstOrDefault<string>(sqlAdminId, new { id = ID, password = PASSWORD });
 
