@@ -94,26 +94,26 @@ public void getDashboard() {
 
 
 }
-        public void viewDentistSchedule() 
+        public void viewDentistSchedule()
         {
-            Console.WriteLine("Enter dentist id:");
-            string idDentist = Console.ReadLine();
-            try
+            Dentist dentist = new Dentist();
+
+            for (int i = 0; i < appointments.Count; i++)
             {
-                Dentist dentist = dao.adminGetDentist(idDentist);
-                Console.Write(string.Join(", " , dao.viewDentistAppointments(dentist)));
-            } catch (Exception e) 
-            {
-                Console.WriteLine("Please try again");
-                getDashboard();
+                Booking booking = appointments[i];
+                
+
+                Console.WriteLine("Date: " + booking.Date);
+                Console.WriteLine("Reason: " + booking.ReasonForAppointment);
+                Console.WriteLine("Priority: " + booking.PriorityLevel);
             }
         }
          public void reschedule(Booking booking, DateTime Newdate) {
          // we neeed setter methods in booking class to change the date of the booking
-         Console.WriteLine(booking.getDate());
+         Console.WriteLine(booking.Date);
          Console.WriteLine("please write new date:");
-         booking.setDate(Newdate);
-         Console.WriteLine("booking rescheduled to " + booking.getDate());
+         booking.Date = Newdate;
+         Console.WriteLine("booking rescheduled to " + booking.Date);
        }
        public void book() {
        new Booking();

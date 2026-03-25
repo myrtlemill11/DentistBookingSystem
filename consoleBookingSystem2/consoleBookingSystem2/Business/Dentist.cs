@@ -12,9 +12,6 @@ namespace consoleBookingSystem.Buisness
 {
     public class Dentist : User
     {
-        // usage for sql database access
-        SQLDAOImplementation dao = new SQLDAOImplementation();
-        
         // data fields
         [JsonProperty]
         public string speciality;
@@ -36,19 +33,7 @@ namespace consoleBookingSystem.Buisness
             return dao.viewAppointments();
         }
 
-
-
-        public class Booking
-        {
-            public int BookingId { get; set; }
-            public DateTime date { get; set; }
-            public string dentist { get; set; }
-            public string patient { get; set; }
-            public string reasonForAppt { get; set; }
-            public int priorityLevel { get; set; }
-        }
-
-
+        
         // setter methods
         public void setSpecialty(string s)
         {
@@ -58,7 +43,7 @@ namespace consoleBookingSystem.Buisness
         // Dentist Dashboard Methods
         
 
-        public void getDashboard()
+        public void showDashboard()
         {
             bool loggedIn = true;
 
@@ -84,8 +69,7 @@ namespace consoleBookingSystem.Buisness
                         break;
 
                     case "3":
-                        Console.WriteLine("Enter an appointment to cancel:");
-                        cancelAppointment(DateTime.Parse(Console.ReadLine()));
+                        cancelAppointment();
                         break;
 
                     case "4":
@@ -109,50 +93,43 @@ namespace consoleBookingSystem.Buisness
 
             foreach (Booking b in bookings)
             {
-                Console.WriteLine("Date: " + b.date);
-                Console.WriteLine("Reason: " + b.reasonForAppt);
-                Console.WriteLine("Priority: " + b.priorityLevel);
+                Console.WriteLine("Date: " + b.Date);
+                Console.WriteLine("Reason: " + b.ReasonForAppointment);
+                Console.WriteLine("Priority: " + b.PriorityLevel);
             }
         }
+
+
 
         private void confirmAppointment()
         {
+            Console.WriteLine("Enter appointment ID to confirm:");
+            int id = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("Enter appointment date to confirm:");
-            try
-            {
-                DateTime date = DateTime.Parse(Console.ReadLine());
-                Console.WriteLine(dao.viewAppointment(date));
-                Console.WriteLine("Appointment " + date + " confirmed.");
-            }
-            catch (Exception ex) 
-            {
-                Console.WriteLine("Please try again");
-                this.getDashboard();
-            }
+            dao.ConfirmAppointment(id);   // ✅ calls database
 
-            
+            Console.WriteLine("Appointment confirmed.");
         }
 
-        private void cancelAppointment(DateTime d)
+
+        private void cancelAppointment()
         {
             Console.WriteLine("Enter appointment ID to cancel:");
-            string id = Console.ReadLine();
-            SQLDAOImplementation dao = new SQLDAOImplementation();
-            dao.DeleteAppointment(d);
-            Console.WriteLine("Appointment " + id + " cancelled.");
+            int id = int.Parse(Console.ReadLine());
+
+            dao.DeleteAppointment(id);   //
+
+            Console.WriteLine("Appointment cancelled.");
         }
         
         private void viewPatients()
         {
-            Console.WriteLine("Viewing patients list...");
-            List<Patient> patients = dao.dentistViewPatientData(this);
+            var patients = dao.GetAllPatients();
 
             foreach (var p in patients)
             {
                 Console.WriteLine(p.getFirstName() + " " + p.getLastName());
             }
-
         }
 
 
@@ -161,4 +138,3 @@ namespace consoleBookingSystem.Buisness
 
         
     }
-

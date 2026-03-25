@@ -15,10 +15,10 @@ namespace consoleBookingSystem.Data
     public class SQLDAOImplementation
     {
         private string connString = ConfigurationManager
-.ConnectionStrings["AppointmentsDB"].ConnectionString;
-        
-        
-        
+            .ConnectionStrings["AppointmentsDB"].ConnectionString;
+
+
+
         public List<Patient> GetAllPatients()
         {
             using (var conn = new SqlConnection(connString))
@@ -27,7 +27,7 @@ namespace consoleBookingSystem.Data
             }
         }
 
-        
+
         public int DeleteAppointment(int BookingId)
         {
             using (var conn = new SqlConnection(connString))
@@ -37,9 +37,9 @@ namespace consoleBookingSystem.Data
             }
         }
 
-        
-        
-        
+
+
+
         public int ConfirmAppointment(int id)
         {
             using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
@@ -57,46 +57,46 @@ namespace consoleBookingSystem.Data
             {
 
                 return conn.Query<Booking>("SELECT * FROM Bookings ORDER BY date")
-                           .ToList();
+                    .ToList();
             }
         }
 
 
-        
-                public Dentist adminGetDentist(string ID)
+
+        public Dentist adminGetDentist(string ID)
         {
             using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
             {
-                    // get all data fields of object to create dentist object to return
-                    string sqlDentistId = "SELECT id FROM Users WHERE id = @id";
-                    string dentistId = conn.QueryFirstOrDefault<string>(sqlDentistId, new { id = ID });
+                // get all data fields of object to create dentist object to return
+                string sqlDentistId = "SELECT id FROM Users WHERE id = @id";
+                string dentistId = conn.QueryFirstOrDefault<string>(sqlDentistId, new { id = ID });
 
-                    string sqlDentistPassword = "SELECT password FROM Users WHERE id = @id";
-                    string dentistPassword = conn.QueryFirstOrDefault<string>(sqlDentistPassword, new { id = ID });
+                string sqlDentistPassword = "SELECT password FROM Users WHERE id = @id";
+                string dentistPassword = conn.QueryFirstOrDefault<string>(sqlDentistPassword, new { id = ID });
 
-                    string sqlDentistFirstName = "SELECT firstName FROM Users WHERE id = @id";
-                    string dentistFirstName = conn.QueryFirstOrDefault<string>(sqlDentistFirstName, new { id = ID });
+                string sqlDentistFirstName = "SELECT firstName FROM Users WHERE id = @id";
+                string dentistFirstName = conn.QueryFirstOrDefault<string>(sqlDentistFirstName, new { id = ID });
 
-                    string sqlDentistLastName = "SELECT lastName FROM Users WHERE id = @id";
-                    string dentistLastName = conn.QueryFirstOrDefault<string>(sqlDentistLastName, new { id = ID });
+                string sqlDentistLastName = "SELECT lastName FROM Users WHERE id = @id";
+                string dentistLastName = conn.QueryFirstOrDefault<string>(sqlDentistLastName, new { id = ID });
 
-                    string sqlDentistPhone = "SELECT phoneNumber FROM Users WHERE id = @id";
-                    long dentistPhoneNumber = conn.QueryFirstOrDefault<long>(sqlDentistPhone, new { id = ID });
+                string sqlDentistPhone = "SELECT phoneNumber FROM Users WHERE id = @id";
+                long dentistPhoneNumber = conn.QueryFirstOrDefault<long>(sqlDentistPhone, new { id = ID });
 
-                    string sqlDentistEmail = "SELECT email FROM Users WHERE id = @id";
-                    string dentistEmail = conn.QueryFirstOrDefault<string>(sqlDentistEmail, new { id = ID });
+                string sqlDentistEmail = "SELECT email FROM Users WHERE id = @id";
+                string dentistEmail = conn.QueryFirstOrDefault<string>(sqlDentistEmail, new { id = ID });
 
-                    Dentist dentist = new Dentist();
-                    dentist.setEmail(dentistEmail);
-                    dentist.setFirstName(dentistFirstName);
-                    dentist.setLastName(dentistLastName);
-                    dentist.setPhoneNumber(dentistPhoneNumber);
-                    dentist.setPassword(dentistPassword);
-                    dentist.setId(dentistId);
+                Dentist dentist = new Dentist();
+                dentist.setEmail(dentistEmail);
+                dentist.setFirstName(dentistFirstName);
+                dentist.setLastName(dentistLastName);
+                dentist.setPhoneNumber(dentistPhoneNumber);
+                dentist.setPassword(dentistPassword);
+                dentist.setId(dentistId);
 
 
-                    return dentist;
-                
+                return dentist;
+
             }
         }
 
@@ -105,27 +105,29 @@ namespace consoleBookingSystem.Data
             using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
             {
                 return conn.Query<string>("SELECT date, priorityLevel FROM Appointments")
-                       .ToList();
-            }    
+                    .ToList();
+            }
         }
 
-                public List<Patient> dentistViewPatientData(Dentist d)
+        public List<Patient> dentistViewPatientData(Dentist d)
+        {
+            using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
+            {
+
+
+                string sql = "SELECT patient FROM Appointments WHERE JSON_VALUE([dentist], '$.id') = @id";
+                var patientJsonList = conn.Query<string>(sql, new { id = d.getId() }).ToList();
+                List<Patient> patients = new List<Patient>();
+                foreach (var patientJson in patientJsonList)
                 {
-                    using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
-                    {
-
-
-                        string sql = "SELECT patient FROM Appointments WHERE JSON_VALUE([dentist], '$.id') = @id";
-                        var patientJsonList = conn.Query<string>(sql, new { id = d.getId() }).ToList();
-                        List<Patient> patients = new List<Patient>();
-                        foreach (var patientJson in patientJsonList)
-                        {
-                            Patient patient = JsonConvert.DeserializeObject<Patient>(patientJson);
-                            patients.Add(patient);
-                        }
-                    return patients;
-                    }
+                    Patient patient = JsonConvert.DeserializeObject<Patient>(patientJson);
+                    patients.Add(patient);
                 }
+
+                return patients;
+            }
+        }
+
         public Booking viewAppointment(DateTime date)
         {
             using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
@@ -147,47 +149,49 @@ namespace consoleBookingSystem.Data
                 int priority = conn.QueryFirstOrDefault<int>(sqlPriority, new { date });
 
                 Booking booking = new Booking();
-                booking.setDate(AppointmentDate);
-                booking.setReason(reason);
-                booking.setPriorityLevel(priority);
-                booking.setDentist(JsonConvert.DeserializeObject<Dentist>(dentist));
-                booking.setPatient(JsonConvert.DeserializeObject<Patient>(patient));
-        
+                booking.Date = AppointmentDate;
+                booking.ReasonForAppointment = reason;
+                booking.PriorityLevel = priority;
+                booking.Dentist = JsonConvert.DeserializeObject<Dentist>(dentist);
+                booking.Patient = JsonConvert.DeserializeObject<Patient>(patient);
+
                 return booking;
 
 
             }
         }
+
         public int InsertAppointment(Booking Booking)
         {
-        // get Json string of dentist object to store in database
-        var dentistJson = Newtonsoft.Json.JsonConvert.SerializeObject(Booking.getDentist());
-        // get Json string of patient object to store in database
-        var patientJson = Newtonsoft.Json.JsonConvert.SerializeObject(Booking.getPatient());
+            // get Json string of dentist object to store in database
+            var dentistJson = Newtonsoft.Json.JsonConvert.SerializeObject(Booking.Dentist);
+            // get Json string of patient object to store in database
+            var patientJson = Newtonsoft.Json.JsonConvert.SerializeObject(Booking.Patient);
             using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
             {
                 string sql = @"INSERT INTO Bookings
                    (date, dentist, patient, reasonForAppt, priorityLevel)
                    VALUES (@date, @dentist, @patient, @reasonForAppt, @priorityLevel);
                    SELECT CAST(SCOPE_IDENTITY() AS INT);";
-                    
-                int newId = conn.ExecuteScalar<int>(sql, new 
+
+                int newId = conn.ExecuteScalar<int>(sql, new
                 {
-                    date = Booking.getDate(),
-                    dentist = Booking.getDentist().getId(), 
-                    patient = Booking.getPatient().getId(),
-                    reasonForAppt = Booking.getReason(),
-                    priorityLevel = Booking.getPriorityLevel()
+                    date = Booking.Date,
+                    dentist = Booking.Dentist.getId(),
+                    patient = Booking.Patient.getId(),
+                    reasonForAppt = Booking.ReasonForAppointment,
+                    priorityLevel = Booking.PriorityLevel
                 });
                 return newId;
             }
         }
-        public int UpdateAppointment(Booking booking) 
+
+        public int UpdateAppointment(Booking booking)
         {
             // get Json string of dentist object to store in database
-            var dentistJson = Newtonsoft.Json.JsonConvert.SerializeObject(booking.getDentist());
+            var dentistJson = Newtonsoft.Json.JsonConvert.SerializeObject(booking.Dentist);
             // get Json string of patient object to store in database
-            var patientJson = Newtonsoft.Json.JsonConvert.SerializeObject(booking.getPatient());
+            var patientJson = Newtonsoft.Json.JsonConvert.SerializeObject(booking.Patient);
 
             using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
             {
@@ -199,17 +203,17 @@ namespace consoleBookingSystem.Data
 
                 using (Microsoft.Data.SqlClient.SqlCommand cmd = new Microsoft.Data.SqlClient.SqlCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@date", booking.getDate());
-                    cmd.Parameters.AddWithValue("@reasonForAppointment", booking.getReason());
-                    cmd.Parameters.AddWithValue("@priorityLevel", booking.getPriorityLevel());
-            
+                    cmd.Parameters.AddWithValue("@date", booking.Date);
+                    cmd.Parameters.AddWithValue("@reasonForAppointment", booking.ReasonForAppointment);
+                    cmd.Parameters.AddWithValue("@priorityLevel", booking.PriorityLevel);
+
                     conn.Open();
                     return cmd.ExecuteNonQuery();
                 }
             }
         }
 
-                public User getUser(string ID, string PASSWORD, string type)
+        public User getUser(string ID, string PASSWORD, string type)
         {
             using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
             {
@@ -217,22 +221,28 @@ namespace consoleBookingSystem.Data
                 {
                     // get all data fields of object to create object to return
                     string sqlDentistId = "SELECT id FROM Users WHERE id = @id and password = @password";
-                    string dentistId = conn.QueryFirstOrDefault<string>(sqlDentistId, new { id = ID, password = PASSWORD });
+                    string dentistId =
+                        conn.QueryFirstOrDefault<string>(sqlDentistId, new { id = ID, password = PASSWORD });
 
                     string sqlDentistPassword = "SELECT password FROM Users WHERE id = @id and password = @password";
-                    string dentistPassword = conn.QueryFirstOrDefault<string>(sqlDentistPassword, new { id = ID, password = PASSWORD });
+                    string dentistPassword =
+                        conn.QueryFirstOrDefault<string>(sqlDentistPassword, new { id = ID, password = PASSWORD });
 
                     string sqlDentistFirstName = "SELECT firstName FROM Users WHERE id = @id and password = @password";
-                    string dentistFirstName = conn.QueryFirstOrDefault<string>(sqlDentistFirstName, new { id = ID, password = PASSWORD });
+                    string dentistFirstName =
+                        conn.QueryFirstOrDefault<string>(sqlDentistFirstName, new { id = ID, password = PASSWORD });
 
                     string sqlDentistLastName = "SELECT lastName FROM Users WHERE id = @id and password = @password";
-                    string dentistLastName = conn.QueryFirstOrDefault<string>(sqlDentistLastName, new { id = ID, password = PASSWORD });
+                    string dentistLastName =
+                        conn.QueryFirstOrDefault<string>(sqlDentistLastName, new { id = ID, password = PASSWORD });
 
                     string sqlDentistPhone = "SELECT phoneNumber FROM Users WHERE id = @id and password = @password";
-                    long dentistPhoneNumber = conn.QueryFirstOrDefault<long>(sqlDentistPhone, new { id = ID, password = PASSWORD });
+                    long dentistPhoneNumber =
+                        conn.QueryFirstOrDefault<long>(sqlDentistPhone, new { id = ID, password = PASSWORD });
 
                     string sqlDentistEmail = "SELECT email FROM Users WHERE id = @id and password = @password";
-                    string dentistEmail = conn.QueryFirstOrDefault<string>(sqlDentistEmail, new { id = ID, password = PASSWORD });
+                    string dentistEmail =
+                        conn.QueryFirstOrDefault<string>(sqlDentistEmail, new { id = ID, password = PASSWORD });
 
                     Dentist dentist = new Dentist();
                     dentist.setEmail(dentistEmail);
@@ -250,22 +260,28 @@ namespace consoleBookingSystem.Data
                 {
                     // get all data fields of object to create object to return
                     string sqlPatientId = "SELECT id FROM Users WHERE id = @id and password = @password";
-                    string patientId = conn.QueryFirstOrDefault<string>(sqlPatientId, new { id = ID, password = PASSWORD });
+                    string patientId =
+                        conn.QueryFirstOrDefault<string>(sqlPatientId, new { id = ID, password = PASSWORD });
 
                     string sqlPatientPassword = "SELECT password FROM Users WHERE id = @id and password = @password";
-                    string patientPassword = conn.QueryFirstOrDefault<string>(sqlPatientPassword, new { id = ID, password = PASSWORD });
+                    string patientPassword =
+                        conn.QueryFirstOrDefault<string>(sqlPatientPassword, new { id = ID, password = PASSWORD });
 
                     string sqlPatientFirstName = "SELECT firstName FROM Users WHERE id = @id and password = @password";
-                    string patientFirstName = conn.QueryFirstOrDefault<string>(sqlPatientFirstName, new { id = ID, password = PASSWORD });
+                    string patientFirstName =
+                        conn.QueryFirstOrDefault<string>(sqlPatientFirstName, new { id = ID, password = PASSWORD });
 
                     string sqlPatientLastName = "SELECT lastName FROM Users WHERE id = @id and password = @password";
-                    string patientLastName = conn.QueryFirstOrDefault<string>(sqlPatientLastName, new { id = ID, password = PASSWORD });
+                    string patientLastName =
+                        conn.QueryFirstOrDefault<string>(sqlPatientLastName, new { id = ID, password = PASSWORD });
 
                     string sqlPatientPhone = "SELECT phoneNumber FROM Users WHERE id = @id and password = @password";
-                    long patientPhoneNumber = conn.QueryFirstOrDefault<long>(sqlPatientPhone, new { id = ID, password = PASSWORD });
+                    long patientPhoneNumber =
+                        conn.QueryFirstOrDefault<long>(sqlPatientPhone, new { id = ID, password = PASSWORD });
 
                     string sqlPatientEmail = "SELECT email FROM Users WHERE id = @id and password = @password";
-                    string patientEmail = conn.QueryFirstOrDefault<string>(sqlPatientEmail, new { id = ID, password = PASSWORD });
+                    string patientEmail =
+                        conn.QueryFirstOrDefault<string>(sqlPatientEmail, new { id = ID, password = PASSWORD });
 
                     Patient patient = new Patient();
                     patient.setEmail(patientEmail);
@@ -279,26 +295,31 @@ namespace consoleBookingSystem.Data
                     return patient;
                 }
 
-                else if(type == "admin")
+                else if (type == "admin")
                 {
                     // get all data fields of object to create object to return
                     string sqlAdminId = "SELECT id FROM Users WHERE id = @id and password = @password";
                     string adminId = conn.QueryFirstOrDefault<string>(sqlAdminId, new { id = ID, password = PASSWORD });
 
                     string sqlAdminPassword = "SELECT password FROM Users WHERE id = @id and password = @password";
-                    string adminPassword = conn.QueryFirstOrDefault<string>(sqlAdminPassword, new { id = ID, password = PASSWORD });
+                    string adminPassword =
+                        conn.QueryFirstOrDefault<string>(sqlAdminPassword, new { id = ID, password = PASSWORD });
 
                     string sqlAdminFirstName = "SELECT firstName FROM Users WHERE id = @id and password = @password";
-                    string adminFirstName = conn.QueryFirstOrDefault<string>(sqlAdminFirstName, new { id = ID, password = PASSWORD });
+                    string adminFirstName =
+                        conn.QueryFirstOrDefault<string>(sqlAdminFirstName, new { id = ID, password = PASSWORD });
 
                     string sqlAdminLastName = "SELECT lastName FROM Users WHERE id = @id and password = @password";
-                    string adminLastName = conn.QueryFirstOrDefault<string>(sqlAdminLastName, new { id = ID, password = PASSWORD });
+                    string adminLastName =
+                        conn.QueryFirstOrDefault<string>(sqlAdminLastName, new { id = ID, password = PASSWORD });
 
                     string sqlAdminPhone = "SELECT phoneNumber FROM Users WHERE id = @id and password = @password";
-                    long adminPhoneNumber = conn.QueryFirstOrDefault<long>(sqlAdminPhone, new { id = ID, password = PASSWORD });
+                    long adminPhoneNumber =
+                        conn.QueryFirstOrDefault<long>(sqlAdminPhone, new { id = ID, password = PASSWORD });
 
                     string sqlAdminEmail = "SELECT email FROM Users WHERE id = @id and password = @password";
-                    string adminEmail = conn.QueryFirstOrDefault<string>(sqlAdminEmail, new { id = ID, password = PASSWORD });
+                    string adminEmail =
+                        conn.QueryFirstOrDefault<string>(sqlAdminEmail, new { id = ID, password = PASSWORD });
 
                     Admin admin = new Admin();
                     admin.setEmail(adminEmail);
@@ -318,10 +339,10 @@ namespace consoleBookingSystem.Data
                 }
             }
         }
-        
+
         public int insertUser(User user)
         {
-        using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
+            using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
             {
                 string sql = @"INSERT INTO Users
                (firstName, lastName, id, password, email, phoneNumber)
@@ -342,6 +363,7 @@ namespace consoleBookingSystem.Data
             }
 
         }
+
         public int DeleteUser(string id)
         {
             using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
@@ -350,7 +372,7 @@ namespace consoleBookingSystem.Data
                 return conn.Execute(sql, new { Id = id });
             }
         }
-         
+
         public List<string> viewUsers()
         {
 
@@ -358,9 +380,10 @@ namespace consoleBookingSystem.Data
             {
 
                 return conn.Query<string>("SELECT * FROM Users ORDER BY id")
-                .ToList();
+                    .ToList();
             }
         }
 
     }
+}
 
