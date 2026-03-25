@@ -145,7 +145,9 @@ namespace consoleBookingSystem.Buisness
             if (id == dentist.getId() && password == dentist.getPassword())
             {
                 Console.WriteLine("Login successful!");
-
+                // get dentist dashboard
+                Dentist dentist1 = (Dentist)dentist;
+                dentist1.getDashboard();
             }
             else
             {
