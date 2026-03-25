@@ -117,17 +117,6 @@ namespace consoleBookingSystem.Buisness
 
 
 
-        private void confirmAppointment()
-        {
-            Console.WriteLine("Enter appointment ID to confirm:");
-            int id = int.Parse(Console.ReadLine());
-
-            dao.ConfirmAppointment(id);   // ✅ calls database
-
-            Console.WriteLine("Appointment confirmed.");
-        }
-
-
         private void cancelAppointment(DateTime d)
         {
             Console.WriteLine("Enter appointment ID to cancel:");
