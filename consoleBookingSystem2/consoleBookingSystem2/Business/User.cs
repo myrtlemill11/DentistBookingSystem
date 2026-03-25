@@ -53,6 +53,12 @@ namespace consoleBookingSystem.Buisness
         }
 
         // setter methods
+
+        public void setPassword(string s)
+        {
+            password = s;
+        }
+        
         public void setFirstName(string s)
         {
             firstName = s;
