@@ -8,6 +8,8 @@ namespace consoleBookingSystem2.Business
 {
     public class Login
     {
+        public SQLDAOImplementation dao = new SQLDAOImplementation();
+        
         //no arg constructor
         public Login()
         {
