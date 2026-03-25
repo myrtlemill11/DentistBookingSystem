@@ -114,7 +114,10 @@ namespace consoleBookingSystem.Buisness
             if (id == patient.getId() && password == patient.getPassword())
             {
                 Console.WriteLine("Login successful!");
-                Console.WriteLine("Patient dashboard not implemented yet.");
+                
+                // patient dashboard
+                Patient patient1 = (Patient)patient;
+                patient1.getDashboard();
 
             }
             else
