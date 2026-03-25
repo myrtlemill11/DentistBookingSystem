@@ -8,7 +8,6 @@ using consoleBookingSystem.Data;
 
 
 
-
 namespace consoleBookingSystem.Buisness
 {
     public class Admin : User

@@ -16,6 +16,28 @@ namespace consoleBookingSystem.Data
     {
         private string connString = ConfigurationManager
 .ConnectionStrings["AppointmentsDB"].ConnectionString;
+        
+        public int DeleteAppointment(int BookingId)
+        {
+            using (var conn = new SqlConnection(connString))
+            {
+                string sql = "DELETE FROM Bookings WHERE BookingId = @Id";
+                return conn.Execute(sql, new { Id = BookingId });
+            }
+        }
+
+        
+        
+        
+        public int ConfirmAppointment(int id)
+        {
+            using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
+            {
+                string sql = "UPDATE Bookings SET status = 'Confirmed' WHERE BookingId = @Id";
+                return conn.Execute(sql, new { Id = id });
+            }
+        }
+
 
         public List<Booking> viewAppointments()
         {

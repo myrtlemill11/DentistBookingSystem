@@ -19,6 +19,8 @@ namespace consoleBookingSystem.Buisness
         private Patient[] patients = new Patient[20];
         [JsonProperty]
         private List<Booking> appointments = new List<Booking>();
+        private SQLDAOImplementation dao = new SQLDAOImplementation();
+
 
         // getter methods
         public Patient[] getPatients()
@@ -28,9 +30,9 @@ namespace consoleBookingSystem.Buisness
 
         public List<Booking> getAppointments()
         {
-            SQLDAOImplementation dao = new SQLDAOImplementation();
             return dao.viewAppointments();
         }
+
 
 
         public Booking getAppointment(Booking b)
@@ -53,7 +55,7 @@ namespace consoleBookingSystem.Buisness
 
             while (loggedIn)
             {
-                Console.WriteLine("\n=== Dentist Dashboard ===");
+                Console.WriteLine("\nDentist Dashboard");
                 Console.WriteLine("1. View Appointments");
                 Console.WriteLine("2. Confirm Appointment");
                 Console.WriteLine("3. Cancel Appointment");
@@ -107,22 +109,32 @@ namespace consoleBookingSystem.Buisness
         private void confirmAppointment()
         {
             Console.WriteLine("Enter appointment ID to confirm:");
-            string id = Console.ReadLine();
+            int id = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("Appointment " + id + " confirmed.");
+            dao.ConfirmAppointment(id);   // ✅ calls database
+
+            Console.WriteLine("Appointment confirmed.");
         }
+
 
         private void cancelAppointment()
         {
             Console.WriteLine("Enter appointment ID to cancel:");
-            string id = Console.ReadLine();
+            int id = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("Appointment " + id + " cancelled.");
+            dao.DeleteAppointment(id);   //
+
+            Console.WriteLine("Appointment cancelled.");
         }
-
+        
         private void viewPatients()
         {
             Console.WriteLine("Viewing patients list...");
         }
+
+
+        }
+
+        
     }
-}
+
