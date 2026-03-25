@@ -139,12 +139,14 @@ namespace consoleBookingSystem.Buisness
         
         private void viewPatients()
         {
-            var patients = dao.GetAllPatients();
+            Console.WriteLine("Viewing patients list...");
+            List<Patient> patients = dao.dentistViewPatientData(this);
 
             foreach (var p in patients)
             {
                 Console.WriteLine(p.getFirstName() + " " + p.getLastName());
             }
+
         }
 
 
