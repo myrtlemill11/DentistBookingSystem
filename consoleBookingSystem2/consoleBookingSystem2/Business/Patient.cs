@@ -11,6 +11,8 @@ namespace consoleBookingSystem.Buisness
 {
     public class Patient : User
     {
+        // use for editing bookings in the database
+        SQLDAOImplementation dao = new SQLDAOImplementation();
         // data fields
         [JsonProperty]
         private List<string> allergies = new List<string>();
