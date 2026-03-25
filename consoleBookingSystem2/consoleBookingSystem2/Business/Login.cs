@@ -9,7 +9,7 @@ namespace consoleBookingSystem2.Business
     public class Login
     {
         //no arg constructor
-        Login()
+        public Login()
         {
 
         }
