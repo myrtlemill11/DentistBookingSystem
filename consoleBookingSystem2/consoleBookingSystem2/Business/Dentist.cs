@@ -55,7 +55,7 @@ namespace consoleBookingSystem.Buisness
         // Dentist Dashboard Methods
         
 
-        public void showDashboard()
+        public void getDashboard()
         {
             bool loggedIn = true;
 
