@@ -61,6 +61,15 @@ namespace consoleBookingSystem.Data
             }
         }
 
+        public List<string> adminViewAppointments()
+        {
+            using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
+            {
+                return conn.Query<string>("SELECT date, priorityLevel FROM Appointments")
+                       .ToList();
+            }    
+        }
+
         public Booking viewAppointment(DateTime date)
 {
     using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
