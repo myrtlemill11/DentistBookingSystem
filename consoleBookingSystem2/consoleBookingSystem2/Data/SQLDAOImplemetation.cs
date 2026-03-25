@@ -113,6 +113,116 @@ namespace consoleBookingSystem.Data
             }
         }
 
+                public User getUser(string ID, string PASSWORD, string type)
+        {
+            using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
+            {
+                if (type == "dentist")
+                {
+                    // get all data fields of object to create admin object to return
+                    string sqlDentistId = "SELECT id FROM Users WHERE id = @id and password = @password";
+                    string dentistId = conn.QueryFirstOrDefault<string>(sqlDentistId, new { id = ID, password = PASSWORD });
+
+                    string sqlDentistPassword = "SELECT password FROM Users WHERE id = @id and password = @password";
+                    string dentistPassword = conn.QueryFirstOrDefault<string>(sqlDentistPassword, new { id = ID, password = PASSWORD });
+
+                    string sqlDentistFirstName = "SELECT firstName FROM Users WHERE id = @id and password = @password";
+                    string dentistFirstName = conn.QueryFirstOrDefault<string>(sqlDentistFirstName, new { id = ID, password = PASSWORD });
+
+                    string sqlDentistLastName = "SELECT lastName FROM Users WHERE id = @id and password = @password";
+                    string dentistLastName = conn.QueryFirstOrDefault<string>(sqlDentistLastName, new { id = ID, password = PASSWORD });
+
+                    string sqlDentistPhone = "SELECT phoneNumber FROM Users WHERE id = @id and password = @password";
+                    long dentistPhoneNumber = conn.QueryFirstOrDefault<long>(sqlDentistPhone, new { id = ID, password = PASSWORD });
+
+                    string sqlDentistEmail = "SELECT email FROM Users WHERE id = @id and password = @password";
+                    string dentistEmail = conn.QueryFirstOrDefault<string>(sqlDentistEmail, new { id = ID, password = PASSWORD });
+
+                    Dentist dentist = new Dentist();
+                    dentist.setEmail(dentistEmail);
+                    dentist.setFirstName(dentistFirstName);
+                    dentist.setLastName(dentistLastName);
+                    dentist.setPhoneNumber(dentistPhoneNumber);
+                    dentist.setPassword(dentistPassword);
+                    dentist.setId(dentistId);
+
+
+                    return dentist;
+                }
+
+                else if (type == "patient")
+                {
+                    // get all data fields of object to create admin object to return
+                    string sqlPatientId = "SELECT id FROM Users WHERE id = @id and password = @password";
+                    string patientId = conn.QueryFirstOrDefault<string>(sqlPatientId, new { id = ID, password = PASSWORD });
+
+                    string sqlPatientPassword = "SELECT password FROM Users WHERE id = @id and password = @password";
+                    string patientPassword = conn.QueryFirstOrDefault<string>(sqlPatientPassword, new { id = ID, password = PASSWORD });
+
+                    string sqlPatientFirstName = "SELECT firstName FROM Users WHERE id = @id and password = @password";
+                    string patientFirstName = conn.QueryFirstOrDefault<string>(sqlPatientFirstName, new { id = ID, password = PASSWORD });
+
+                    string sqlPatientLastName = "SELECT lastName FROM Users WHERE id = @id and password = @password";
+                    string patientLastName = conn.QueryFirstOrDefault<string>(sqlPatientLastName, new { id = ID, password = PASSWORD });
+
+                    string sqlPatientPhone = "SELECT phoneNumber FROM Users WHERE id = @id and password = @password";
+                    long patientPhoneNumber = conn.QueryFirstOrDefault<long>(sqlPatientPhone, new { id = ID, password = PASSWORD });
+
+                    string sqlPatientEmail = "SELECT email FROM Users WHERE id = @id and password = @password";
+                    string patientEmail = conn.QueryFirstOrDefault<string>(sqlPatientEmail, new { id = ID, password = PASSWORD });
+
+                    Patient patient = new Patient();
+                    patient.setEmail(patientEmail);
+                    patient.setFirstName(patientFirstName);
+                    patient.setLastName(patientLastName);
+                    patient.setPhoneNumber(patientPhoneNumber);
+                    patient.setPassword(patientPassword);
+                    patient.setId(patientId);
+
+
+                    return patient;
+                }
+
+                else if(type == "admin")
+                {
+                    // get all data fields of object to create admin object to return
+                    string sqlAdminId = "SELECT id FROM Users WHERE id = @id and password = @password";
+                    string adminId = conn.QueryFirstOrDefault<string>(sqlAdminId, new { id = ID, password = PASSWORD });
+
+                    string sqlAdminPassword = "SELECT password FROM Users WHERE id = @id and password = @password";
+                    string adminPassword = conn.QueryFirstOrDefault<string>(sqlAdminPassword, new { id = ID, password = PASSWORD });
+
+                    string sqlAdminFirstName = "SELECT firstName FROM Users WHERE id = @id and password = @password";
+                    string adminFirstName = conn.QueryFirstOrDefault<string>(sqlAdminFirstName, new { id = ID, password = PASSWORD });
+
+                    string sqlAdminLastName = "SELECT lastName FROM Users WHERE id = @id and password = @password";
+                    string adminLastName = conn.QueryFirstOrDefault<string>(sqlAdminLastName, new { id = ID, password = PASSWORD });
+
+                    string sqlAdminPhone = "SELECT phoneNumber FROM Users WHERE id = @id and password = @password";
+                    long adminPhoneNumber = conn.QueryFirstOrDefault<long>(sqlAdminPhone, new { id = ID, password = PASSWORD });
+
+                    string sqlAdminEmail = "SELECT email FROM Users WHERE id = @id and password = @password";
+                    string adminEmail = conn.QueryFirstOrDefault<string>(sqlAdminEmail, new { id = ID, password = PASSWORD });
+
+                    Admin admin = new Admin();
+                    admin.setEmail(adminEmail);
+                    admin.setFirstName(adminFirstName);
+                    admin.setLastName(adminLastName);
+                    admin.setPhoneNumber(adminPhoneNumber);
+                    admin.setPassword(adminPassword);
+                    admin.setId(adminId);
+
+
+                    return admin;
+                }
+
+                else
+                {
+                    return null;
+                }
+            }
+        }
+        
         public int insertUser(User user)
         {
         using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
