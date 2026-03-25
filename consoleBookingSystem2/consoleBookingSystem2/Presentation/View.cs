@@ -16,7 +16,6 @@ namespace consoleBookingSystem.Presentation
         public void startUI()
         {
             MainUI ui = new MainUI();
-            ui.start();
         }
     }
 }
