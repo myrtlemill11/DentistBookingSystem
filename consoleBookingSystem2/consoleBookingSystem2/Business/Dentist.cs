@@ -115,7 +115,24 @@ namespace consoleBookingSystem.Buisness
             }
         }
 
+        private void confirmAppointment()
+        {
 
+            Console.WriteLine("Enter appointment date to confirm:");
+            try
+            {
+                DateTime date = DateTime.Parse(Console.ReadLine());
+                Console.WriteLine(dao.viewAppointment(date));
+                Console.WriteLine("Appointment " + date + " confirmed.");
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine("Please try again");
+                this.getDashboard();
+            }
+
+            
+        }
 
         private void cancelAppointment(DateTime d)
         {
