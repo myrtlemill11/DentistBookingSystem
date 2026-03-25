@@ -11,7 +11,7 @@ namespace consoleBookingSystem2.Business
         //no arg constructor
         public Login()
         {
-
+            this.startUI();
         }
 
         public void startUI()
