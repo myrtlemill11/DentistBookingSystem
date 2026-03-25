@@ -93,10 +93,58 @@ namespace consoleBookingSystem2.Business
 
         public void patientLogin()
         {
+                        Console.WriteLine("\n=== Patient Login ===");
+
+            Console.Write("Enter ID: ");
+            string id = Console.ReadLine();
+
+            Console.Write("Enter Password: ");
+            string password = Console.ReadLine();
+
+            User patient = new Patient();
+
+            patient = dao.getUser(id, password, "patient");
+
+
+            // Dummy login
+            if (id == patient.getId() && password == patient.getPassword())
+            {
+                Console.WriteLine("Login successful!");
+                Console.WriteLine("Patient dashboard not implemented yet.");
+
+            }
+            else
+            {
+                Console.WriteLine("Invalid login details.");
+            }
+
         }
 
         public void dentistLogin()
         {
+                        Console.WriteLine("\n=== Dentist Login ===");
+
+            Console.Write("Enter ID: ");
+            string id = Console.ReadLine();
+
+            Console.Write("Enter Password: ");
+            string password = Console.ReadLine();
+
+            User dentist = new Dentist();
+
+            dentist = dao.getUser(id, password, "dentist");
+
+            // Dummy login (for now)
+            if (id == dentist.getId() && password == dentist.getPassword())
+            {
+                Console.WriteLine("Login successful!");
+
+            }
+            else
+            {
+                Console.WriteLine("Invalid login details.");
+            }
+
         }
     }
 }
