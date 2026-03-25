@@ -12,6 +12,9 @@ namespace consoleBookingSystem.Buisness
 {
     public class Dentist : User
     {
+        // usage for sql database access
+        SQLDAOImplementation dao = new SQLDAOImplementation();
+        
         // data fields
         [JsonProperty]
         public string speciality;
