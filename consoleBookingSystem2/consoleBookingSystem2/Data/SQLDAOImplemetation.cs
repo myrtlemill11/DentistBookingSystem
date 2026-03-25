@@ -109,38 +109,55 @@ namespace consoleBookingSystem.Data
             }    
         }
 
+                public List<Patient> dentistViewPatientData(Dentist d)
+                {
+                    using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
+                    {
+
+
+                        string sql = "SELECT patient FROM Appointments WHERE JSON_VALUE([dentist], '$.id') = @id";
+                        var patientJsonList = conn.Query<string>(sql, new { id = d.getId() }).ToList();
+                        List<Patient> patients = new List<Patient>();
+                        foreach (var patientJson in patientJsonList)
+                        {
+                            Patient patient = JsonConvert.DeserializeObject<Patient>(patientJson);
+                            patients.Add(patient);
+                        }
+                    return patients;
+                    }
+                }
         public Booking viewAppointment(DateTime date)
-{
-    using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
-    {
+        {
+            using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
+            {
 
-        string sqlDentist = "SELECT dentist FROM Appointments WHERE [date] = @date";
-        string dentist = conn.QueryFirstOrDefault<string>(sqlDentist, new { date });
+                string sqlDentist = "SELECT dentist FROM Appointments WHERE [date] = @date";
+                string dentist = conn.QueryFirstOrDefault<string>(sqlDentist, new { date });
 
-        string sqlPatient = "SELECT patient FROM Appointments WHERE [date] = @date";
-        string patient = conn.QueryFirstOrDefault<string>(sqlPatient, new { date });
+                string sqlPatient = "SELECT patient FROM Appointments WHERE [date] = @date";
+                string patient = conn.QueryFirstOrDefault<string>(sqlPatient, new { date });
 
-        string sqlDate = "SELECT date FROM Appointments WHERE [date] = @date";
-        DateTime AppointmentDate = conn.QueryFirstOrDefault<DateTime>(sqlDate, new { date });
+                string sqlDate = "SELECT date FROM Appointments WHERE [date] = @date";
+                DateTime AppointmentDate = conn.QueryFirstOrDefault<DateTime>(sqlDate, new { date });
 
-        string sqlReason = "SELECT reasonForAppointment FROM Appointments WHERE [date] = @date";
-        string reason = conn.QueryFirstOrDefault<string>(sqlReason, new { date });
+                string sqlReason = "SELECT reasonForAppointment FROM Appointments WHERE [date] = @date";
+                string reason = conn.QueryFirstOrDefault<string>(sqlReason, new { date });
 
-        string sqlPriority = "SELECT priorityLevel FROM Appointments WHERE [date] = @date";
-        int priority = conn.QueryFirstOrDefault<int>(sqlPriority, new { date });
+                string sqlPriority = "SELECT priorityLevel FROM Appointments WHERE [date] = @date";
+                int priority = conn.QueryFirstOrDefault<int>(sqlPriority, new { date });
 
-        Booking booking = new Booking();
-        booking.setDate(AppointmentDate);
-        booking.setReason(reason);
-        booking.setPriorityLevel(priority);
-        booking.setDentist(JsonConvert.DeserializeObject<Dentist>(dentist));
-        booking.setPatient(JsonConvert.DeserializeObject<Patient>(patient));
+                Booking booking = new Booking();
+                booking.setDate(AppointmentDate);
+                booking.setReason(reason);
+                booking.setPriorityLevel(priority);
+                booking.setDentist(JsonConvert.DeserializeObject<Dentist>(dentist));
+                booking.setPatient(JsonConvert.DeserializeObject<Patient>(patient));
         
-        return booking;
+                return booking;
 
 
-    }
-}
+            }
+        }
         public int InsertAppointment(Booking Booking)
         {
         // get Json string of dentist object to store in database
