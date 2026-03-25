@@ -35,10 +35,16 @@ namespace consoleBookingSystem.Buisness
 
 
 
-        public Booking getAppointment(Booking b)
+        public class Booking
         {
-            return b;
+            public int BookingId { get; set; }
+            public DateTime date { get; set; }
+            public string dentist { get; set; }
+            public string patient { get; set; }
+            public string reasonForAppt { get; set; }
+            public int priorityLevel { get; set; }
         }
+
 
         // setter methods
         public void setSpecialty(string s)
@@ -99,11 +105,12 @@ namespace consoleBookingSystem.Buisness
 
             foreach (Booking b in bookings)
             {
-                Console.WriteLine("Date: " + b.getDate());
-                Console.WriteLine("Reason: " + b.getReason());
-                Console.WriteLine("Priority: " + b.getPriorityLevel());
+                Console.WriteLine("Date: " + b.date);
+                Console.WriteLine("Reason: " + b.reasonForAppt);
+                Console.WriteLine("Priority: " + b.priorityLevel);
             }
         }
+
 
 
         private void confirmAppointment()
@@ -129,8 +136,14 @@ namespace consoleBookingSystem.Buisness
         
         private void viewPatients()
         {
-            Console.WriteLine("Viewing patients list...");
+            var patients = dao.GetAllPatients();
+
+            foreach (var p in patients)
+            {
+                Console.WriteLine(p.getFirstName() + " " + p.getLastName());
+            }
         }
+
 
 
         }

@@ -10,43 +10,36 @@ namespace consoleBookingSystem.Buisness
     public class Booking
     {
         // data fields
-        private DateTime date;
+        
         private Dentist dentist;
         private Patient patient;
-        private string reasonForAppointment;
-        private int priorityLevel;
+        
 
         // getter methods
+        
+        
+        public DateTime Date { get; set; }
+        public string ReasonForAppointment { get; set; }
+        public int PriorityLevel { get; set; }
+
         public Patient getPatient()
         {
             return patient;
         }
 
-        public DateTime getDate()
-        {
-            return date;
-        }
+        
 
         public Dentist getDentist()
         {
             return dentist;
         }
 
-        public string getReason()
-        {
-            return reasonForAppointment;
-        }
+        
 
-        public int getPriorityLevel()
-        {
-            return priorityLevel;
-        }
+        
 
         // setter methods
-        public void setDate(DateTime d)
-        {
-            date = d;
-        }
+        
         public void setPatient(Patient p)
         {
             patient = p;
@@ -57,15 +50,9 @@ namespace consoleBookingSystem.Buisness
             dentist = d;
         }
 
-        public void setReason(string r)
-        {
-            reasonForAppointment = r;
-        }
+        
 
-        public void setPriorityLevel(int p)
-        {
-            priorityLevel = p;
-        }
+        
     }
 
 }

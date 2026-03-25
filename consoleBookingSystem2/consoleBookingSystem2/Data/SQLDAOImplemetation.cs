@@ -17,6 +17,17 @@ namespace consoleBookingSystem.Data
         private string connString = ConfigurationManager
 .ConnectionStrings["AppointmentsDB"].ConnectionString;
         
+        
+        
+        public List<Patient> GetAllPatients()
+        {
+            using (var conn = new SqlConnection(connString))
+            {
+                return conn.Query<Patient>("SELECT * FROM Patients").ToList();
+            }
+        }
+
+        
         public int DeleteAppointment(int BookingId)
         {
             using (var conn = new SqlConnection(connString))
