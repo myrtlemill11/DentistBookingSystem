@@ -80,7 +80,9 @@ namespace consoleBookingSystem.Buisness
                 if (id == admin.getId() && password == admin.getPassword())
                 {
                     Console.WriteLine("Login successful!");
-                    Console.WriteLine("Admin dashboard not implemented yet.");
+                    // get dashboard
+                    Admin admin1 = (Admin)admin;
+                    admin1.getDashboard();
                 }
                 else
                 {
