@@ -51,10 +51,7 @@ jobs:
     env:
       Solution_Name: consoleBookingSystem2/consoleBookingSystem2.slnx
       Test_Project_Path: ConsoleBookingSystemTest/ConsoleBookingSystemTest.slnx
-      # Optional: if you later add a packaging project & secrets, set these:
-      Wap_Project_Directory: consoleBookingSystem2.Package
-      Wap_Project_Path: consoleBookingSystem2.Package/consoleBookingSystem2.Package.wapproj
-
+      
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -75,26 +72,4 @@ jobs:
       - name: Run tests
         run: dotnet test $env:Test_Project_Path --no-build --configuration Release
 
-      # 🧩 Optional packaging steps (will only run if WAP project & secrets exist)
-      - name: Decode signing certificate
-        if: ${{ secrets.Base64_Encoded_Pfx != '' && secrets.Pfx_Key != '' }}
-        shell: pwsh
-        run: |
-          $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.Base64_Encoded_Pfx }}")
-          $certificatePath = Join-Path -Path $env:Wap_Project_Directory -ChildPath "GitHubActionsWorkflow.pfx"
-          [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
-
-      - name: Package the app (WAP project)
-        if: ${{ secrets.Base64_Encoded_Pfx != '' && secrets.Pfx_Key != '' }}
-        run: msbuild $env:Wap_Project_Path /p:Configuration=Release /p:UapAppxPackageBuildMode=StoreUpload /p:AppxBundle=Always /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
-
-      - name: Remove the temporary certificate
-        if: ${{ secrets.Base64_Encoded_Pfx != '' && secrets.Pfx_Key != '' }}
-        run: Remove-Item -Path "$env:Wap_Project_Directory\\GitHubActionsWorkflow.pfx" -Force
-
-      - name: Upload MSIX package
-        if: ${{ secrets.Base64_Encoded_Pfx != '' && secrets.Pfx_Key != '' }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: MSIX-Package
-          path: ${{ env.Wap_Project_Directory }}\\AppPackages
+      
