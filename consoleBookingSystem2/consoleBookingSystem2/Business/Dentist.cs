@@ -93,9 +93,9 @@ namespace consoleBookingSystem.Buisness
 
             foreach (Booking b in bookings)
             {
-                Console.WriteLine("Date: " + b.Date);
-                Console.WriteLine("Reason: " + b.ReasonForAppointment);
-                Console.WriteLine("Priority: " + b.PriorityLevel);
+                Console.WriteLine("Date: " + b.getDate());
+                Console.WriteLine("Reason: " + b.getReason());
+                Console.WriteLine("Priority: " + b.getPriorityLevel());
             }
         }
 
@@ -124,7 +124,7 @@ namespace consoleBookingSystem.Buisness
         
         private void viewPatients()
         {
-            var patients = dao.GetAllPatients();
+            var patients = dao.dentistViewPatientData(this);
 
             foreach (var p in patients)
             {

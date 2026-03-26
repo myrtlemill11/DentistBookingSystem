@@ -9,50 +9,63 @@ namespace consoleBookingSystem.Buisness
 {
     public class Booking
     {
-        // data fields
-        
+        // private fields 
         private Dentist dentist;
         private Patient patient;
-        
+        private DateTime date;
+        private string reason;
+        private int priorityLevel;
 
-        // getter methods
-        
-        
-        public DateTime Date { get; set; }
-        public string ReasonForAppointment { get; set; }
-        public int PriorityLevel { get; set; }
+        // getters
+        public Dentist getDentist()
+        {
+            return dentist;
+        }
 
         public Patient getPatient()
         {
             return patient;
         }
 
-        
-
-        public Dentist getDentist()
+        public DateTime getDate()
         {
-            return dentist;
+            return date;
         }
 
-        
-
-        
-
-        // setter methods
-        
-        public void setPatient(Patient p)
+        public string getReason()
         {
-            patient = p;
+            return reason;
         }
 
+        public int getPriorityLevel()
+        {
+            return priorityLevel;
+        }
+
+        // setters
         public void setDentist(Dentist d)
         {
             dentist = d;
         }
 
-        
+        public void setPatient(Patient p)
+        {
+            patient = p;
+        }
 
-        
+        public void setDate(DateTime d)
+        {
+            date = d;
+        }
+
+        public void setReason(string r)
+        {
+            reason = r;
+        }
+
+        public void setPriorityLevel(int p)
+        {
+            priorityLevel = p;
+        }
     }
-
 }
