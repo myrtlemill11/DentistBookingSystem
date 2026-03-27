@@ -118,9 +118,10 @@ public void getDashboard() {
        public void book() {
        new Booking();
        }
-       public void cancel(int bookingId) {
-           SQLDAOImplementation dao = new SQLDAOImplementation();
-           dao.DeleteAppointment(bookingId);
+       public void cancel(DateTime d)
+       {
+            SQLDAOImplementation dao = new SQLDAOImplementation();
+            dao.DeleteAppointment(d);
        }
 
     }
