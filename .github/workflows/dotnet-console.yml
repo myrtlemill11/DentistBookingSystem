@@ -64,12 +64,12 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Restore dependencies
-        run: dotnet restore $env:consoleBookingSystem2/consoleBookingSystem2.slnx
+        run: dotnet restore "${env:Solution_Name}"
 
       - name: Build console app
-        run: dotnet build $env:consoleBookingSystem2/consoleBookingSystem2.slnx --no-restore --configuration Release
+        run: dotnet build "${env:Solution}" --no-restore --configuration Release
 
       - name: Run tests
-        run: dotnet test $env:ConsoleBookingSystemTest/ConsoleBookingSystemTest.slnx --no-build --configuration Release
+        run: dotnet test "${env:Test_Project_Path}" --no-build --configuration Release
 
       
