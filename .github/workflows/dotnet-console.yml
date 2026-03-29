@@ -52,7 +52,7 @@ jobs:
         run: dotnet build "${env:Solution_Name}" --no-restore --configuration Release
 
       - name: Generate coverage report
-        run: dotnet test --collect:"XPlat Code Coverage"
+        run: dotnet test "${env:Test_Project_Path}" --collect:"XPlat Code Coverage"
   
       - name: Run tests
         run: dotnet test "${env:Test_Project_Path}" --no-build --configuration Release
