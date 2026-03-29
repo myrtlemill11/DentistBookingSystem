@@ -69,9 +69,9 @@ namespace consoleBookingSystem.Buisness
                         break;
 
                     case "3":
-                        cancelAppointment();
+                        Console.WriteLine("Enter an appointment to cancel:");
+                        cancelAppointment(DateTime.Parse(Console.ReadLine()));
                         break;
-
                     case "4":
                         viewPatients();
                         break;
