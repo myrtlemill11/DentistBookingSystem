@@ -115,11 +115,10 @@ namespace consoleBookingSystem.Buisness
         private void cancelAppointment()
         {
             Console.WriteLine("Enter appointment ID to cancel:");
-            int id = int.Parse(Console.ReadLine());
-
-            dao.DeleteAppointment(id);   //
-
-            Console.WriteLine("Appointment cancelled.");
+            string id = Console.ReadLine();
+            SQLDAOImplementation dao = new SQLDAOImplementation();
+            dao.DeleteAppointment(d);
+            Console.WriteLine("Appointment " + id + " cancelled.");
         }
         
         private void viewPatients()
