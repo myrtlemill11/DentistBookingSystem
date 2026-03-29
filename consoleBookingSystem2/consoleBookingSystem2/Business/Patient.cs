@@ -265,10 +265,7 @@ namespace consoleBookingSystem.Buisness
             database.InsertAppointment(newBooking); 
             }
 
-
-        }
-
-    // method for dashboard
+ // method for dashboard
 public void getDashboard()
 {
     // set int value for input
@@ -310,6 +307,10 @@ public void getDashboard()
             break;
     }
 }
+        }
+
+   
+
 
 
     }
