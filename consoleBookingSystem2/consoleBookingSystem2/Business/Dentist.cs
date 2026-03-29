@@ -112,7 +112,7 @@ namespace consoleBookingSystem.Buisness
         }
 
 
-        private void cancelAppointment()
+        private void cancelAppointment(DateTime d)
         {
             Console.WriteLine("Enter appointment ID to cancel:");
             string id = Console.ReadLine();
