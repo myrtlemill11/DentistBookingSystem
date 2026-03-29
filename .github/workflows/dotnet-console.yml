@@ -32,6 +32,10 @@ jobs:
       - name: List repo contents
         run: Get-ChildItem -Recurse | Select-Object FullName
 
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
 
       - name: Cache NuGet packages
         uses: actions/cache@v3
@@ -41,20 +45,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nuget-
 
-      - name: Generate coverage report
-        run: dotnet test --collect:"XPlat Code Coverage"
-  
-      - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 8.0.x
-
       - name: Restore dependencies
         run: dotnet restore "${env:Solution_Name}"
 
       - name: Build console app
         run: dotnet build "${env:Solution_Name}" --no-restore --configuration Release
 
+      - name: Generate coverage report
+        run: dotnet test --collect:"XPlat Code Coverage"
+  
       - name: Run tests
         run: dotnet test "${env:Test_Project_Path}" --no-build --configuration Release
       
