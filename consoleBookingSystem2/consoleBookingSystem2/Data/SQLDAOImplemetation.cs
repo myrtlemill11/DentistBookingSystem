@@ -17,16 +17,30 @@ namespace consoleBookingSystem.Data
         private string connString = ConfigurationManager
             .ConnectionStrings["AppointmentsDB"].ConnectionString;
 
-public List<string> viewDentistAppointments(Dentist d) // needs to be fixed
-{
-    // get dentist json to find appointment
-    var dentistJson = Newtonsoft.Json.JsonConvert.SerializeObject(d);
-    using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
+    public List<string> viewDentistAppointments(Dentist d) // needs to be fixed
     {
-        string sql = "SELECT * FROM Appointments WHERE JSON_VALUE([dentist], '$.id') = @id";
-        return conn.Query<string>(sql, new { id = d.getId() }).ToList();
+        // get dentist json to find appointment
+        var dentistJson = Newtonsoft.Json.JsonConvert.SerializeObject(d);
+        using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
+        {
+            string sql = "SELECT * FROM Appointments WHERE JSON_VALUE([dentist], '$.id') = @id";
+            return conn.Query<string>(sql, new { id = d.getId() }).ToList();
+        }
     }
-}
+
+        public List<string> viewPatientAppointments(Patient p) // works
+        {
+            // get patient json to find appointment
+            var patientJson = Newtonsoft.Json.JsonConvert.SerializeObject(p);
+
+            using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
+            {
+
+                string sql = "SELECT * FROM Appointments WHERE JSON_VALUE([patient], '$.id') = @id";
+               
+                return conn.Query<string>(sql, new { id = p.getId() }).ToList();
+            }
+        }
 
         public List<Patient> GetAllPatients()
         {
