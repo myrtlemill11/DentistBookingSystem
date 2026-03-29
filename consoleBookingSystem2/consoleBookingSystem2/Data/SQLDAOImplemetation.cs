@@ -51,13 +51,14 @@ namespace consoleBookingSystem.Data
         }
 
 
-        public int DeleteAppointment(int BookingId)
+        public int DeleteAppointment(DateTime date) //works
         {
-            using (var conn = new SqlConnection(connString))
+            using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
             {
-                string sql = "DELETE FROM Bookings WHERE BookingId = @Id";
-                return conn.Execute(sql, new { Id = BookingId });
+                 string sql = "DELETE FROM Appointments WHERE [date] = @date";
+                 return conn.Execute(sql, new { date });
             }
+    
         }
 
 
