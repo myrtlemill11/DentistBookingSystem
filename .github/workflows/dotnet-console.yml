@@ -58,6 +58,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: List repo contents
+        run: Get-ChildItem -Recurse | Select-Object FullName
+
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4
         with:
