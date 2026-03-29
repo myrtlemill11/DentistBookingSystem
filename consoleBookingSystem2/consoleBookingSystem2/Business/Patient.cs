@@ -268,10 +268,7 @@ namespace consoleBookingSystem.Buisness
 
         }
 
-
-    }
-
-// method for dashboard
+    // method for dashboard
 public void getDashboard()
 {
     // set int value for input
@@ -314,12 +311,10 @@ public void getDashboard()
     }
 }
 
-}
+
+    }
 
 
-
-
-}
 
 
 
