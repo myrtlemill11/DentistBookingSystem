@@ -100,7 +100,29 @@ namespace consoleBookingSystem.Data
             }
         }
 
-
+                public Admin getRandomAdmin()
+        {
+            using (var conn = new Microsoft.Data.SqlClient.SqlConnection(connString))
+            {
+                string sql = "SELECT TOP 1 * FROM Users WHERE id LIKE 'admin%' ORDER BY NEWID()";
+                var adminData = conn.QueryFirstOrDefault(sql);
+                if (adminData != null)
+                {
+                    Admin admin = new Admin();
+                    admin.setEmail(adminData.email);
+                    admin.setFirstName(adminData.firstName);
+                    admin.setLastName(adminData.lastName);
+                    admin.setPhoneNumber(adminData.phoneNumber);
+                    admin.setPassword(adminData.password);
+                    admin.setId(adminData.id);
+                    return admin;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
 
         public Dentist adminGetDentist(string ID)
         {
