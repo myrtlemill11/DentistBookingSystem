@@ -91,19 +91,52 @@ namespace consoleBookingSystem.Buisness
         // methods to change/add bookings
         public void requestCancellation()
         {
+        public void requestCancellation()
+        {
             // get user input for date of appointment to cancel
             Console.WriteLine("Please enter the date of the appointment you wish to cancel (dd/mm/yyyy)");
-             // get user input for date of appointment to cancel
-             Console.WriteLine("Please enter the date of the appointment you wish to cancel (dd/mm/yyyy)");
-             try
-             {
-                 DateTime findAppointmentDate = DateTime.Parse(Console.ReadLine());
-             }
-             catch (Exception e)
-             {
-                 Console.WriteLine("Invalid date format. Please try again.");
+            try
+            {
+                DateTime findAppointmentDate = DateTime.Parse(Console.ReadLine());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Invalid date format. Please try again.");
                 getDashboard();
-             }
+            }
+            // send to admin
+            try
+            {
+                SmtpClient mySmtpClient = new SmtpClient("my.smtp.exampleserver.net");
+
+                // set smtp-client with basicAuthentication
+                mySmtpClient.UseDefaultCredentials = false;
+                System.Net.NetworkCredential basicAuthenticationInfo = new
+                   System.Net.NetworkCredential("username", "password");
+                mySmtpClient.Credentials = basicAuthenticationInfo;
+
+                // mail addresses
+                MailAddress from = new MailAddress("booking@dentist.com", "bookingAppointment");
+                MailAddress to = new MailAddress(dao.getRandomAdmin().getEmail(), "Admin");
+                MailMessage myMail = new MailMessage(from, to);
+
+                // subject and encoding
+                myMail.Subject = "Test message";
+                myMail.SubjectEncoding = System.Text.Encoding.UTF8;
+                // set body-message and encoding
+                myMail.Body = "<p>Please reschedule appointment</p>.";
+                myMail.BodyEncoding = System.Text.Encoding.UTF8;
+                // text or html
+                myMail.IsBodyHtml = true;
+
+                mySmtpClient.Send(myMail);
+
+            }
+            catch (SmtpException ex)
+            {
+                Console.WriteLine("Message failed to send");
+
+            }
 
         }
 
