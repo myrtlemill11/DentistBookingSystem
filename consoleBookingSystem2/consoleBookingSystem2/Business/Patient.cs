@@ -306,6 +306,40 @@ namespace consoleBookingSystem.Buisness
             // add booking to SQL Database
             SQLDAOImplementation database = new SQLDAOImplementation();
             database.InsertAppointment(newBooking); 
+
+                        // notify admin of new booking to finish it
+            try
+            {
+                SmtpClient mySmtpClient = new SmtpClient("my.smtp.exampleserver.net");
+
+                // set smtp-client with basicAuthentication
+                mySmtpClient.UseDefaultCredentials = false;
+                System.Net.NetworkCredential basicAuthenticationInfo = new
+                   System.Net.NetworkCredential("username", "password");
+                mySmtpClient.Credentials = basicAuthenticationInfo;
+
+                // mail addresses
+                MailAddress from = new MailAddress("booking@dentist.com", "bookingAppointment");
+                MailAddress to = new MailAddress(dao.getRandomAdmin().getEmail(), "Admin");
+                MailMessage myMail = new MailMessage(from, to);
+
+                // subject and encoding
+                myMail.Subject = "Test message";
+                myMail.SubjectEncoding = System.Text.Encoding.UTF8;
+                // set body-message and encoding
+                myMail.Body = "<p>New Appointment, please confirm.</p>.";
+                myMail.BodyEncoding = System.Text.Encoding.UTF8;
+                // text or html
+                myMail.IsBodyHtml = true;
+
+                mySmtpClient.Send(myMail);
+
+            }
+            catch (SmtpException ex)
+            {
+                Console.WriteLine("Message failed to send");
+
+            }
             }
 
  // method for dashboard
