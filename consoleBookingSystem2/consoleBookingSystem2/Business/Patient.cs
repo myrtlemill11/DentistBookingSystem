@@ -93,8 +93,18 @@ namespace consoleBookingSystem.Buisness
         {
             // get user input for date of appointment to cancel
             Console.WriteLine("Please enter the date of the appointment you wish to cancel (dd/mm/yyyy)");
-            DateTime findAppointmentDate = DateTime.Parse(Console.ReadLine());
-            // find appointment in SQL database and cancel it
+             // get user input for date of appointment to cancel
+             Console.WriteLine("Please enter the date of the appointment you wish to cancel (dd/mm/yyyy)");
+             try
+             {
+                 DateTime findAppointmentDate = DateTime.Parse(Console.ReadLine());
+             }
+             catch (Exception e)
+             {
+                 Console.WriteLine("Invalid date format. Please try again.");
+                getDashboard();
+             }
+
         }
 
         public void bookAppointment()
