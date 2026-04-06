@@ -91,8 +91,6 @@ namespace consoleBookingSystem.Buisness
         // methods to change/add bookings
         public void requestCancellation()
         {
-        public void requestCancellation()
-        {
             // get user input for date of appointment to cancel
             Console.WriteLine("Please enter the date of the appointment you wish to cancel (dd/mm/yyyy)");
             try
