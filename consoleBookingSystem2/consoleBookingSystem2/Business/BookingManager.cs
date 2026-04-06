@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using consoleBookingSystem.Data;
 
-namespace consoleBookingSystem2.Business
+namespace consoleBookingSystem2.Buisness
 {
     public class BookingManager
     {
