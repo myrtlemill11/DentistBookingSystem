@@ -61,17 +61,10 @@ namespace consoleBookingSystem.Presentation
             Console.Clear();
             Console.WriteLine("=== Add Booking ===");
 
-            Console.Write("Enter Booking ID: ");
-            int id = int.Parse(Console.ReadLine());
-
-            Console.Write("Enter Dentist ID: ");
-            int dentistId = int.Parse(Console.ReadLine());
-
-            Console.Write("Enter Patient ID: ");
-            int patientId = int.Parse(Console.ReadLine());
-
-            Console.Write("Enter Date (yyyy-mm-dd): ");
-            DateTime date = DateTime.Parse(Console.ReadLine());
+            int id = ReadInt("Enter Booking ID: ");
+            int dentistId = ReadInt("Enter Dentist ID: ");
+            int patientId = ReadInt("Enter Patient ID: ");
+            DateTime date = ReadDate("Enter Date (yyyy-mm-dd): ");
 
             Booking booking = new Booking(id, dentistId, patientId, date);
             bookingManager.AddBooking(booking);
@@ -84,8 +77,7 @@ namespace consoleBookingSystem.Presentation
             Console.Clear();
             Console.WriteLine("=== Search Booking ===");
 
-            Console.Write("Enter Date (yyyy-mm-dd): ");
-            DateTime date = DateTime.Parse(Console.ReadLine());
+            DateTime date = ReadDate("Enter Date (yyyy-mm-dd): ");
 
             Booking result = bookingManager.SearchByDate(date);
 
@@ -106,12 +98,37 @@ namespace consoleBookingSystem.Presentation
             Console.Clear();
             Console.WriteLine("=== Cancel Booking ===");
 
-            Console.Write("Enter Booking ID to cancel: ");
-            int id = int.Parse(Console.ReadLine());
+            int id = ReadInt("Enter Booking ID to cancel: ");
 
             bookingManager.CancelBooking(id);
 
             Pause();
+        }
+
+        private int ReadInt(string message)
+        {
+            int value;
+            Console.Write(message);
+
+            while (!int.TryParse(Console.ReadLine(), out value))
+            {
+                Console.Write("Invalid number. Try again: ");
+            }
+
+            return value;
+        }
+
+        private DateTime ReadDate(string message)
+        {
+            DateTime date;
+            Console.Write(message);
+
+            while (!DateTime.TryParse(Console.ReadLine(), out date))
+            {
+                Console.Write("Invalid date. Try again (yyyy-mm-dd): ");
+            }
+
+            return date;
         }
 
         private void Pause()
