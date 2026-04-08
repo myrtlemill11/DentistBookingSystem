@@ -50,5 +50,22 @@ namespace consoleBookingSystem2.Business
                 );
             }
         }
+
+        // ⭐ NEW FEATURE: View bookings by dentist
+        public List<Booking> GetBookingsByDentist(int dentistId)
+        {
+            List<Booking> results = new List<Booking>();
+            var allBookings = bookingList.GetAll();
+
+            foreach (var b in allBookings)
+            {
+                if (b.DentistId == dentistId)
+                {
+                    results.Add(b);
+                }
+            }
+
+            return results;
+        }
     }
 }
