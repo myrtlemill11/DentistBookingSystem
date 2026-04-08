@@ -1,10 +1,5 @@
-﻿using consoleBookingSystem.Presentation;
+using consoleBookingSystem.Presentation;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace consoleBookingSystem
 {
@@ -12,8 +7,8 @@ namespace consoleBookingSystem
     {
         static void Main(string[] args)
         {
-            View v = new View();
-            v.startUI();
+            MainUI ui = new MainUI();
+            ui.Start();
         }
     }
 }
