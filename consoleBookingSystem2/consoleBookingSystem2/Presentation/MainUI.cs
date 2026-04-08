@@ -20,7 +20,8 @@ namespace consoleBookingSystem.Presentation
                 Console.WriteLine("2. View All Bookings");
                 Console.WriteLine("3. Search Booking by Date");
                 Console.WriteLine("4. Cancel Booking");
-                Console.WriteLine("5. Exit");
+                Console.WriteLine("5. View Bookings by Dentist");
+                Console.WriteLine("6. Exit");
                 Console.Write("Choose an option: ");
 
                 string choice = Console.ReadLine();
@@ -45,6 +46,10 @@ namespace consoleBookingSystem.Presentation
                         break;
 
                     case "5":
+                        ViewByDentistUI();
+                        break;
+
+                    case "6":
                         running = false;
                         break;
 
@@ -101,6 +106,30 @@ namespace consoleBookingSystem.Presentation
             int id = ReadInt("Enter Booking ID to cancel: ");
 
             bookingManager.CancelBooking(id);
+
+            Pause();
+        }
+
+        private void ViewByDentistUI()
+        {
+            Console.Clear();
+            Console.WriteLine("=== Bookings by Dentist ===");
+
+            int dentistId = ReadInt("Enter Dentist ID: ");
+
+            var results = bookingManager.GetBookingsByDentist(dentistId);
+
+            if (results.Count == 0)
+            {
+                Console.WriteLine("No bookings found for this dentist.");
+            }
+            else
+            {
+                foreach (var b in results)
+                {
+                    Console.WriteLine($"Booking {b.BookingId} | Patient {b.PatientId} | Date {b.Date}");
+                }
+            }
 
             Pause();
         }
