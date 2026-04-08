@@ -1,36 +1,54 @@
-using consoleBookingSystem.Buisness;
-
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using consoleBookingSystem.Data;
+using consoleBookingSystem2.Business.Models;
+using consoleBookingSystem2.Business.DataStructures;
 
-namespace consoleBookingSystem.Buisness
+namespace consoleBookingSystem2.Business
 {
     public class BookingManager
     {
-        private Booking[] bookings = new Booking[200];
-        private int count = 0;
+        private BookingLinkedList bookingList = new BookingLinkedList();
 
         public void AddBooking(Booking booking)
         {
-            bookings[count] = booking;
-            count++;
+            bookingList.Add(booking);
+            Console.WriteLine("Booking added successfully!");
+        }
+
+        public void CancelBooking(int bookingId)
+        {
+            bool removed = bookingList.Remove(bookingId);
+            Console.WriteLine(removed ? "Booking cancelled." : "Booking not found.");
         }
 
         public Booking SearchByDate(DateTime date)
         {
-            for (int i = 0; i < count; i++)
+            var allBookings = bookingList.GetAll();
+            foreach (var b in allBookings)
             {
-                if (bookings[i].getDate() == date)
+                if (b.Date == date)
                 {
-                    return bookings[i];
+                    return b;
                 }
             }
             return null;
+        }
+
+        public void ViewBookings()
+        {
+            var allBookings = bookingList.GetAll();
+            if (allBookings.Count == 0)
+            {
+                Console.WriteLine("No bookings found.");
+                return;
+            }
+
+            foreach (var b in allBookings)
+            {
+                Console.WriteLine(
+                    $"Booking ID: {b.BookingId}, Dentist: {b.DentistId}, Patient: {b.PatientId}, Date: {b.Date}"
+                );
+            }
         }
     }
 }
