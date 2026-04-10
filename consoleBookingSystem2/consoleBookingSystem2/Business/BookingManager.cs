@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using consoleBookingSystem2.Buisness;
-using consoleBookingSystem2.Buisness.DataStructures;
+using consoleBookingSystem.Buisness;
+using consoleBookingSystem.Buisness.DataStructures;
 
-namespace consoleBookingSystem2.Buisness
+namespace consoleBookingSystem.Buisness
 {
     public class BookingManager
     {
