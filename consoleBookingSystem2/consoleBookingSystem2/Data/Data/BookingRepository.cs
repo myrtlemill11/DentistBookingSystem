@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using consoleBookingSystem2.Business.Models;
+using consoleBookingSystem2.Buisness;
 
 namespace consoleBookingSystem2.Data
 {
