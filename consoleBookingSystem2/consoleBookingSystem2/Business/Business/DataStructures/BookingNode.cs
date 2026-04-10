@@ -1,6 +1,6 @@
-using consoleBookingSystem2.Buisness;
+using consoleBookingSystem.Buisness;
 
-namespace consoleBookingSystem2.Business.DataStructures
+namespace consoleBookingSystem.Business.DataStructures
 {
     public class BookingNode
     {
