@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using consoleBookingSystem2.Business;
+using consoleBookingSystem2.Buisness;
 using consoleBookingSystem2.Buisness.DataStructures;
 
 namespace consoleBookingSystem2.Buisness
