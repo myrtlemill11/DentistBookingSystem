@@ -7,3 +7,5 @@ Trello board: https://trello.com/invite/b/69bc536b97a7c4e706cd6a3e/ATTId0d661038
 1) Download Dapper (nuget package)
 2) Download Microsoft.Data.SqlClient (nuget package)
 3) Download Newtonsoft.Json (nuget package)
+
+Run SQL query, download database, open microsoft visual studio and run program.
