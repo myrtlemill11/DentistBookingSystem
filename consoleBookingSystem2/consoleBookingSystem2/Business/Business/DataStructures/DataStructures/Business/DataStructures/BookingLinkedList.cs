@@ -1,4 +1,5 @@
 using consoleBookingSystem.Buisness;
+using consoleBookingSystem.Buisness.DataStructures;
 
 namespace consoleBookingSystem.Buisness.DataStructures
 {
