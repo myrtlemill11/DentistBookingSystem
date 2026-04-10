@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using consoleBookingSystem2.Buisness;
+using consoleBookingSystem.Buisness;
 
-namespace consoleBookingSystem2.Data
+namespace consoleBookingSystem.Data
 {
     public class BookingRepository
     {
