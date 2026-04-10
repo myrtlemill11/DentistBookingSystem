@@ -1,4 +1,4 @@
-using consoleBookingSystem2.Business.Models;
+using consoleBookingSystem2.Buisness;
 
 namespace consoleBookingSystem2.Business.DataStructures
 {
