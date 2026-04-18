@@ -2,6 +2,7 @@ using System;
 
 namespace consoleBookingSystem2.Business
 {
+    // Represents a single booking in the system
     public class Booking
     {
         public int BookingId { get; set; }
