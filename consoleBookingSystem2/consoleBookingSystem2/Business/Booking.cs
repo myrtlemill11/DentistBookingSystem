@@ -1,71 +1,20 @@
-using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace consoleBookingSystem.Buisness
+namespace consoleBookingSystem2.Business
 {
     public class Booking
     {
-        // private fields 
-        private Dentist dentist;
-        private Patient patient;
-        private DateTime date;
-        private string reason;
-        private int priorityLevel;
+        public int BookingId { get; set; }
+        public int DentistId { get; set; }
+        public int PatientId { get; set; }
+        public DateTime Date { get; set; }
 
-        // getters
-        public Dentist getDentist()
+        public Booking(int bookingId, int dentistId, int patientId, DateTime date)
         {
-            return dentist;
-        }
-
-        public Patient getPatient()
-        {
-            return patient;
-        }
-
-        public DateTime getDate()
-        {
-            return date;
-        }
-
-        public string getReason()
-        {
-            return reason;
-        }
-
-        public int getPriorityLevel()
-        {
-            return priorityLevel;
-        }
-
-        // setters
-        public void setDentist(Dentist d)
-        {
-            dentist = d;
-        }
-
-        public void setPatient(Patient p)
-        {
-            patient = p;
-        }
-
-        public void setDate(DateTime d)
-        {
-            date = d;
-        }
-
-        public void setReason(string r)
-        {
-            reason = r;
-        }
-
-        public void setPriorityLevel(int p)
-        {
-            priorityLevel = p;
+            BookingId = bookingId;
+            DentistId = dentistId;
+            PatientId = patientId;
+            Date = date;
         }
     }
 }
