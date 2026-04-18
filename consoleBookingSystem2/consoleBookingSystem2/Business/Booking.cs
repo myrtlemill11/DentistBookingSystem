@@ -22,5 +22,10 @@ namespace consoleBookingSystem2.Business
         {
             return $"Booking ID: {BookingId}, Dentist: {DentistId}, Patient: {PatientId}, Date: {Date}";
         }
+
+        public string GetSummary()
+        {
+            return $"[{BookingId}] Dentist {DentistId} → Patient {PatientId} on {Date}";
+        }
     }
 }
