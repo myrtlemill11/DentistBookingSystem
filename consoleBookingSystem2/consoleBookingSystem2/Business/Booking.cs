@@ -16,5 +16,10 @@ namespace consoleBookingSystem2.Business
             PatientId = patientId;
             Date = date;
         }
+
+        public override string ToString()
+        {
+            return $"Booking ID: {BookingId}, Dentist: {DentistId}, Patient: {PatientId}, Date: {Date}";
+        }
     }
 }
