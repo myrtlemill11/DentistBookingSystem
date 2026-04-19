@@ -13,6 +13,7 @@
   <ItemGroup>
     <Compile Remove="Business\OldSystem\**\*.cs" />
     <Compile Remove="Data\OldSystem\**\*.cs" />
+    <Compile Remove="Presentation\OldSystem\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup>
