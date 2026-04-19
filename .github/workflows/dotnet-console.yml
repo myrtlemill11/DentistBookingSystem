@@ -1,4 +1,4 @@
-name: .NET Console Build on main
+name: .NET Console Build
 
 on:
   push:
@@ -13,16 +13,17 @@ jobs:
         os: [windows-latest]
         dotnet-version: [8.0.x]
       fail-fast: false
+
     runs-on: ${{ matrix.os }}
 
     env:
       Solution_Name: consoleBookingSystem2/consoleBookingSystem2.slnx
       Test_Project_Path: ConsoleBookingSystemTest/ConsoleBookingSystemTest.slnx
-      
+
     permissions:
       contents: read
       packages: write
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -51,15 +52,11 @@ jobs:
       - name: Build console app
         run: dotnet build "${env:Solution_Name}" --no-restore --configuration Release
 
-      - name: Generate coverage report
-        run: dotnet test "${env:Test_Project_Path}" --collect:"XPlat Code Coverage" --configuration Release
-  
       - name: Run tests
         run: dotnet test "${env:Test_Project_Path}" --configuration Release
-      
+
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: build-output
           path: consoleBookingSystem2/bin/Release
-      
