@@ -10,16 +10,21 @@ namespace consoleBookingSystem.Buisness
     {
         private BookingLinkedList bookingList = new BookingLinkedList();
         private FileStorage storage = new FileStorage();
+        private Logger logger = new Logger();   // logging support
 
         public void AddBooking(Booking booking)
         {
             bookingList.Add(booking);
+            logger.Write($"Added booking {booking.BookingId}");
             Console.WriteLine("Booking added successfully!");
         }
 
         public void CancelBooking(int bookingId)
         {
             bool removed = bookingList.Remove(bookingId);
+            logger.Write(removed 
+                ? $"Cancelled booking {bookingId}" 
+                : $"Failed to cancel booking {bookingId}");
             Console.WriteLine(removed ? "Booking cancelled." : "Booking not found.");
         }
 
@@ -29,8 +34,12 @@ namespace consoleBookingSystem.Buisness
             foreach (var b in allBookings)
             {
                 if (b.Date == date)
+                {
+                    logger.Write($"Searched booking by date {date}");
                     return b;
+                }
             }
+            logger.Write($"No booking found on {date}");
             return null;
         }
 
@@ -40,6 +49,7 @@ namespace consoleBookingSystem.Buisness
             if (allBookings.Count == 0)
             {
                 Console.WriteLine("No bookings found.");
+                logger.Write("Viewed bookings: none found");
                 return;
             }
 
@@ -49,6 +59,8 @@ namespace consoleBookingSystem.Buisness
                     $"Booking ID: {b.BookingId}, Dentist: {b.DentistId}, Patient: {b.PatientId}, Date: {b.Date}"
                 );
             }
+
+            logger.Write("Viewed all bookings");
         }
 
         public List<Booking> GetBookingsByDentist(int dentistId)
@@ -62,10 +74,10 @@ namespace consoleBookingSystem.Buisness
                     results.Add(b);
             }
 
+            logger.Write($"Viewed bookings for dentist {dentistId}");
             return results;
         }
 
-        // Generate next ID
         public int GenerateNextBookingId()
         {
             var all = bookingList.GetAll();
@@ -78,22 +90,22 @@ namespace consoleBookingSystem.Buisness
                 if (b.BookingId > max)
                     max = b.BookingId;
             }
+
             return max + 1;
         }
 
-        // Load from file (not auto-called)
         public List<Booking> LoadFromFile()
         {
+            logger.Write("Loaded bookings from file");
             return storage.LoadAll();
         }
 
-        // Save all bookings
         public void SaveAll()
         {
             storage.SaveAll(bookingList.GetAll());
+            logger.Write("Saved all bookings to file");
         }
 
-        // Validation helpers (not wired into UI)
         public bool IsBookingIdInUse(int bookingId)
         {
             var all = bookingList.GetAll();
