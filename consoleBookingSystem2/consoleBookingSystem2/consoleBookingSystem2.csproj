@@ -18,6 +18,7 @@
     <Compile Remove="Business\Login.cs" />
     <Compile Remove="Data\GetData.cs" />
     <Compile Remove="Presentation\View.cs" />
+    <Compile Remove="Presentation\MainUI.cs" />
   </ItemGroup>
 
   <ItemGroup>
