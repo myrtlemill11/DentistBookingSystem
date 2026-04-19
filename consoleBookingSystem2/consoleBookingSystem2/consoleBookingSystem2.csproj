@@ -10,7 +10,6 @@
     <Folder Include="Properties\" />
   </ItemGroup>
 
-  <!-- ⭐ EXCLUDE OLD SYSTEM FILES FROM COMPILATION -->
   <ItemGroup>
     <Compile Remove="Business\OldSystem\**\*.cs" />
     <Compile Remove="Data\OldSystem\**\*.cs" />
