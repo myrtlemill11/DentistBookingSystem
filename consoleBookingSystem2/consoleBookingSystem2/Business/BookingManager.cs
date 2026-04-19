@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using consoleBookingSystem.Buisness;
-using consoleBookingSystem.Buisness.DataStructures;
-using consoleBookingSystem2.Business;
+using consoleBookingSystem2.Business.Models;
+using consoleBookingSystem2.Business.DataStructures;
 
-namespace consoleBookingSystem.Buisness
+namespace consoleBookingSystem2.Business
 {
     public class BookingManager
     {
@@ -22,8 +21,8 @@ namespace consoleBookingSystem.Buisness
         public void CancelBooking(int bookingId)
         {
             bool removed = bookingList.Remove(bookingId);
-            logger.Write(removed 
-                ? $"Cancelled booking {bookingId}" 
+            logger.Write(removed
+                ? $"Cancelled booking {bookingId}"
                 : $"Failed to cancel booking {bookingId}");
             Console.WriteLine(removed ? "Booking cancelled." : "Booking not found.");
         }
