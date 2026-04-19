@@ -1,6 +1,6 @@
 using System;
 
-namespace consoleBookingSystem2.Business
+namespace consoleBookingSystem2.Business.Models
 {
     public class Booking
     {
