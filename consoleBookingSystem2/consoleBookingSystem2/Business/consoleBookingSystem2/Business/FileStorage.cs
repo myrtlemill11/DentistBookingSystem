@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using consoleBookingSystem2.Business.Models;
 
 namespace consoleBookingSystem2.Business
 {
