@@ -1,96 +1,30 @@
 using System;
-using System.Collections.Generic;
-using consoleBookingSystem.Buisness;
-using consoleBookingSystem.Buisness.DataStructures;
-using consoleBookingSystem2.Business;
 
-namespace consoleBookingSystem.Buisness
+namespace consoleBookingSystem2.Business
 {
-    public class BookingManager
+    public class Booking
     {
-        private BookingLinkedList bookingList = new BookingLinkedList();
-        private FileStorage storage = new FileStorage();
+        public int BookingId { get; set; }
+        public int DentistId { get; set; }
+        public int PatientId { get; set; }
+        public DateTime Date { get; set; }
 
-        public void AddBooking(Booking booking)
+        public Booking(int bookingId, int dentistId, int patientId, DateTime date)
         {
-            bookingList.Add(booking);
-            Console.WriteLine("Booking added successfully!");
+            BookingId = bookingId;
+            DentistId = dentistId;
+            PatientId = patientId;
+            Date = date;
         }
 
-        public void CancelBooking(int bookingId)
+        public override string ToString()
         {
-            bool removed = bookingList.Remove(bookingId);
-            Console.WriteLine(removed ? "Booking cancelled." : "Booking not found.");
+            return $"Booking ID: {BookingId}, Dentist: {DentistId}, Patient: {PatientId}, Date: {Date}";
         }
 
-        public Booking SearchByDate(DateTime date)
+        public string GetSummary()
         {
-            var allBookings = bookingList.GetAll();
-            foreach (var b in allBookings)
-            {
-                if (b.Date == date)
-                    return b;
-            }
-            return null;
-        }
-
-        public void ViewBookings()
-        {
-            var allBookings = bookingList.GetAll();
-            if (allBookings.Count == 0)
-            {
-                Console.WriteLine("No bookings found.");
-                return;
-            }
-
-            foreach (var b in allBookings)
-            {
-                Console.WriteLine(
-                    $"Booking ID: {b.BookingId}, Dentist: {b.DentistId}, Patient: {b.PatientId}, Date: {b.Date}"
-                );
-            }
-        }
-
-        public List<Booking> GetBookingsByDentist(int dentistId)
-        {
-            List<Booking> results = new List<Booking>();
-            var allBookings = bookingList.GetAll();
-
-            foreach (var b in allBookings)
-            {
-                if (b.DentistId == dentistId)
-                    results.Add(b);
-            }
-
-            return results;
-        }
-
-        // Generate next ID
-        public int GenerateNextBookingId()
-        {
-            var all = bookingList.GetAll();
-            if (all.Count == 0)
-                return 1;
-
-            int max = 0;
-            foreach (var b in all)
-            {
-                if (b.BookingId > max)
-                    max = b.BookingId;
-            }
-            return max + 1;
-        }
-
-        // Load from file (not auto-called)
-        public List<Booking> LoadFromFile()
-        {
-            return storage.LoadAll();
-        }
-
-        // Save all bookings
-        public void SaveAll()
-        {
-            storage.SaveAll(bookingList.GetAll());
+            return $"[{BookingId}] Dentist {DentistId} → Patient {PatientId} on {Date}";
         }
     }
 }
