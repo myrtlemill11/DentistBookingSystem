@@ -10,6 +10,12 @@
     <Folder Include="Properties\" />
   </ItemGroup>
 
+  <!-- ⭐ EXCLUDE OLD SYSTEM FILES FROM COMPILATION -->
+  <ItemGroup>
+    <Compile Remove="Business\OldSystem\**\*.cs" />
+    <Compile Remove="Data\OldSystem\**\*.cs" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.72" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.0" />
